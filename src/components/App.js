@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
-import { authService } from "fBase";
+import { authService } from "fbase";
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
-  return <AppRouter isLoggedIn={isLoggedIn} />;
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
+  return (
+    <>
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
+      <footer>&copy; {new Date().getFullYear()} Rwitter</footer>
+    </>
+  );
 }
 
 export default App;
