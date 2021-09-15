@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newAccount, setNewAccount] = useState(false);
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -35,7 +36,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="Log In" />
+        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
       </form>
       <div>Continue with Github</div>
       <div>Continue with Google</div>
