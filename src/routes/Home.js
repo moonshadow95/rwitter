@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import Rweet from "components/Rweet";
 
 const Home = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
@@ -41,9 +42,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {rweets.map((rweet) => (
-          <div key={rweet.id}>
-            <h4>{rweet.text}</h4>
-          </div>
+          <Rweet
+            key={rweet.id}
+            rweetObj={rweet}
+            isOwner={rweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>
