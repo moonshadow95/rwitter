@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { dbService } from "fbase";
 import Rweet from "components/Rweet";
 
 const Home = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
   const [rweets, setRweets] = useState([]);
+  const [attachment, setAttachment] = useState();
+  const fileInput = useRef();
   useEffect(() => {
     dbService.collection("rweets").onSnapshot((snapshot) => {
       const rweetArray = snapshot.docs.map((doc) => ({
@@ -28,6 +30,24 @@ const Home = ({ userObj }) => {
     } = event;
     setRweet(value);
   };
+  const onFileChange = (event) => {
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(theFile);
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+  };
+  const onClearAttachment = () => {
+    setAttachment(null);
+    fileInput.current.value = null;
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -38,7 +58,21 @@ const Home = ({ userObj }) => {
           maxLength={120}
           onChange={onChange}
         />
+        <input
+          ref={fileInput}
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+        />
         <input type="submit" value="Rweet"></input>
+        {attachment && (
+          <>
+            <div>
+              <img src={attachment} width="50px" height="50px" alt="Preview" />
+              <button onClick={onClearAttachment}>Clear</button>
+            </div>
+          </>
+        )}
       </form>
       <div>
         {rweets.map((rweet) => (
