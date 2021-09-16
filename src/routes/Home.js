@@ -2,12 +2,23 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
-
+  const [rweets, setRweets] = useState([]);
+  useEffect(() => {
+    dbService.collection("rweets").onSnapshot((snapshot) => {
+      const rweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setRweets(rweetArray);
+    });
+  }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("rweets").add({ rweet, createdAt: Date.now() });
+    await dbService
+      .collection("rweets")
+      .add({ text: rweet, createdAt: Date.now(), creatorId: userObj.uid });
     setRweet("");
   };
   const onChange = (event) => {
@@ -28,6 +39,13 @@ const Home = () => {
         />
         <input type="submit" value="Rweet"></input>
       </form>
+      <div>
+        {rweets.map((rweet) => (
+          <div key={rweet.id}>
+            <h4>{rweet.text}</h4>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
