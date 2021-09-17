@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import react, { useState } from "react";
 
 const Rweet = ({ rweetObj, isOwner }) => {
@@ -9,6 +9,7 @@ const Rweet = ({ rweetObj, isOwner }) => {
     const ok = window.confirm("Are you sure?");
     if (ok) {
       await dbService.doc(`rweets/${rweetObj.id}`).delete();
+      await storageService.refFromURL(rweetObj.attachmentUrl).delete();
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
@@ -42,6 +43,14 @@ const Rweet = ({ rweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{rweetObj.text}</h4>
+          {rweetObj.attachmentUrl && (
+            <img
+              src={rweetObj.attachmentUrl}
+              width="50px"
+              height="50px"
+              alt=""
+            />
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Rweet</button>

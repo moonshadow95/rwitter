@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import { dbService } from "fbase";
+import { v4 as uuidv4 } from "uuid";
+import { dbService, storageService } from "fbase";
 import Rweet from "components/Rweet";
 
 const Home = ({ userObj }) => {
@@ -19,10 +20,23 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService
-      .collection("rweets")
-      .add({ text: rweet, createdAt: Date.now(), creatorId: userObj.uid });
+    let attachmentUrl = "";
+    if (attachment) {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const rweetObj = {
+      text: rweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
+    await dbService.collection("rweets").add(rweetObj);
     setRweet("");
+    setAttachment("");
   };
   const onChange = (event) => {
     const {
