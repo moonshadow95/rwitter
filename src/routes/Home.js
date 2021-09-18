@@ -7,7 +7,7 @@ import Rweet from "components/Rweet";
 const Home = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
   const [rweets, setRweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   const fileInput = useRef();
   useEffect(() => {
     dbService.collection("rweets").onSnapshot((snapshot) => {
