@@ -46,6 +46,9 @@ const Rweet = ({ rweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{rweetObj.text}</h4>
+          <ul>
+            {rweetObj.hashtag && rweetObj.hashtag.map((tag) => <li>{tag}</li>)}
+          </ul>
           {rweetObj.attachmentUrl && (
             <img src={rweetObj.attachmentUrl} alt="" />
           )}

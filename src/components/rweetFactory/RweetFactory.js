@@ -7,10 +7,15 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 const RweetFactory = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
   const [attachment, setAttachment] = useState("");
+  const [hashtag, setHashtag] = useState("");
   const fileInput = useRef();
   const onSubmit = async (event) => {
+    let formatedHashtag;
     if (rweet === "") {
       return;
+    }
+    if (hashtag !== "") {
+      formatedHashtag = formatHashtags(hashtag);
     }
     event.preventDefault();
     let attachmentUrl = "";
@@ -25,17 +30,24 @@ const RweetFactory = ({ userObj }) => {
       text: rweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      hashtag: formatedHashtag,
       attachmentUrl,
     };
     await dbService.collection("rweets").add(rweetObj);
     setRweet("");
     setAttachment("");
   };
-  const onChange = (event) => {
+  const onRweetChange = (event) => {
     const {
       target: { value },
     } = event;
     setRweet(value);
+  };
+  const onHashtagChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setHashtag(value);
   };
   const onFileChange = (event) => {
     const {
@@ -57,20 +69,34 @@ const RweetFactory = ({ userObj }) => {
     setAttachment(null);
     fileInput.current.value = null;
   };
+  const formatHashtags = (hashtag) => {
+    return hashtag
+      .split(",")
+      .map((tag) =>
+        tag.trim().startsWith("#") ? tag : `#${tag.replace(" ", "")}`
+      );
+  };
   return (
     <form onSubmit={onSubmit} className="factoryForm">
       <div className="factoryInput__container">
         <input
           className="factoryInput__input"
           value={rweet}
-          onChange={onChange}
+          onChange={onRweetChange}
           type="text"
           placeholder="What's on your mind?"
           maxLength={120}
         />
+        <input
+          type="text"
+          value={hashtag}
+          onChange={onHashtagChange}
+          placeholder="Hashtag splits by ,"
+          maxLength={100}
+        />
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
-      <label for="attach-file" className="factoryInput__label">
+      <label htmlFor="attach-file" className="factoryInput__label">
         <span>Add photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
