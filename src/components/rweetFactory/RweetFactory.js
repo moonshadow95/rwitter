@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { formatHashtags } from "hashtagFormatter";
 
 const RweetFactory = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
@@ -69,13 +70,7 @@ const RweetFactory = ({ userObj }) => {
     setAttachment(null);
     fileInput.current.value = null;
   };
-  const formatHashtags = (hashtag) => {
-    return hashtag
-      .split(",")
-      .map((tag) =>
-        tag.trim().startsWith("#") ? tag : `#${tag.replace(" ", "")}`
-      );
-  };
+
   return (
     <form onSubmit={onSubmit} className="factoryForm">
       <div className="factoryInput__container">

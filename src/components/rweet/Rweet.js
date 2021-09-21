@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { formatHashtags } from "hashtagFormatter";
 
 const Rweet = ({ rweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newRweet, setNewRweet] = useState(rweetObj.text);
+  const [newHashtag, setNewHashtag] = useState(rweetObj.hashtag);
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure?");
     if (ok) {
@@ -14,17 +16,28 @@ const Rweet = ({ rweetObj, isOwner }) => {
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
-  const onChange = (event) => {
+  const onRweetChange = (event) => {
     const {
       target: { value },
     } = event;
     setNewRweet(value);
   };
+  const onHashtagChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    const newValue = formatHashtags(value);
+    setNewHashtag(newValue);
+  };
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.doc(`rweets/${rweetObj.id}`).update({ text: newRweet });
+    await dbService
+      .doc(`rweets/${rweetObj.id}`)
+      .update({ hashtag: newHashtag });
     setEditing(false);
   };
+
   return (
     <div className="rweet">
       {editing ? (
@@ -34,8 +47,15 @@ const Rweet = ({ rweetObj, isOwner }) => {
               type="text"
               placeholder="Edit Rweet"
               value={newRweet}
-              onChange={onChange}
+              onChange={onRweetChange}
               required
+            />
+            <input
+              type="text"
+              value={newHashtag}
+              onChange={onHashtagChange}
+              placeholder="Hashtag splits by ,"
+              maxLength={100}
             />
             <input type="submit" value="Update Rweet" className="formBtn" />
           </form>
