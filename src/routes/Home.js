@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
-import Rweet from "components/Rweet";
-import RweetFactory from "components/RweetFactory";
+import Rweet from "components/rweet/Rweet";
+import RweetFactory from "components/rweetFactory/RweetFactory";
 
 const Home = ({ userObj }) => {
   const [rweets, setRweets] = useState([]);
@@ -17,9 +16,9 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <RweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {rweets.map((rweet) => (
           <Rweet
             key={rweet.id}

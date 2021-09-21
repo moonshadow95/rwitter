@@ -1,0 +1,99 @@
+.spinner {
+  font-size: 100px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  list-style: none;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.spinner li {
+  display: block;
+  width: 0.2em;
+  height: 0.2em;
+  position: absolute;
+  border-radius: 50%;
+}
+.spinner li:nth-child(1) {
+  background: #c4c4c4;
+  top: 0;
+  left: 50%;
+  margin-left: -0.1em;
+  transform-origin: 50% 250%;
+  animation: rota 1.13s linear infinite,
+    opa 3.67s ease-in-out infinite alternate;
+}
+
+.spinner li:nth-child(2) {
+  background: #9b9b9b;
+  top: 50%;
+  right: 0;
+  margin-top: -0.1em;
+  transform-origin: -150% 50%;
+  animation: rota 1.86s linear infinite,
+    opa 4.29s ease-in-out infinite alternate;
+}
+
+.spinner li:nth-child(3) {
+  background: #707070;
+  bottom: 0;
+  left: 50%;
+  margin-left: -0.1em;
+  transform-origin: 50% -150%;
+  animation: rota 1.45s linear infinite,
+    opa 5.12s ease-in-out infinite alternate;
+}
+
+.spinner li:nth-child(4) {
+  background: #3f3f3f;
+  top: 50%;
+  left: 0;
+  margin-top: -0.1em;
+  transform-origin: 250% 50%;
+  animation: rota 1.72s linear infinite,
+    opa 5.25s ease-in-out infinite alternate;
+}
+
+@keyframes rota {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes opa {
+  12.0% {
+    opacity: 0.8;
+  }
+  19.5% {
+    opacity: 0.88;
+  }
+  37.2% {
+    opacity: 0.64;
+  }
+  40.5% {
+    opacity: 0.52;
+  }
+  52.7% {
+    opacity: 0.69;
+  }
+  60.2% {
+    opacity: 0.6;
+  }
+  66.6% {
+    opacity: 0.52;
+  }
+  70.0% {
+    opacity: 0.63;
+  }
+  79.9% {
+    opacity: 0.6;
+  }
+  84.2% {
+    opacity: 0.75;
+  }
+  91.0% {
+    opacity: 0.87;
+  }
+}

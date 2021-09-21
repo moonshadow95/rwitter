@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
+import styles from "./app.module.css";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -37,7 +37,12 @@ function App() {
           userObj={userObj}
         />
       ) : (
-        "Initializing..."
+        <ul className={styles.spinner}>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       )}
       <footer>&copy; {new Date().getFullYear()} Rwitter</footer>
     </>

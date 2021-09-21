@@ -1,6 +1,7 @@
-/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
-import react, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const Rweet = ({ rweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -25,10 +26,10 @@ const Rweet = ({ rweetObj, isOwner }) => {
     setEditing(false);
   };
   return (
-    <div>
+    <div className="rweet">
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="container rweetEdit">
             <input
               type="text"
               placeholder="Edit Rweet"
@@ -36,26 +37,27 @@ const Rweet = ({ rweetObj, isOwner }) => {
               onChange={onChange}
               required
             />
-            <input type="submit" value="Update Rweet" />
+            <input type="submit" value="Update Rweet" className="formBtn" />
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <span onClick={toggleEditing} className="formBtn calcelBtn">
+            Cancel
+          </span>
         </>
       ) : (
         <>
           <h4>{rweetObj.text}</h4>
           {rweetObj.attachmentUrl && (
-            <img
-              src={rweetObj.attachmentUrl}
-              width="50px"
-              height="50px"
-              alt=""
-            />
+            <img src={rweetObj.attachmentUrl} alt="" />
           )}
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Rweet</button>
-              <button onClick={toggleEditing}>Edit Rweet</button>
-            </>
+            <div className="rweet__actions">
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faEdit} />
+              </span>
+            </div>
           )}
         </>
       )}

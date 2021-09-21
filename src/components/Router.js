@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
-import Navigation from "./Navigation";
+import Navigation from "./navigator/Navigation";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
@@ -11,14 +11,14 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
       {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
         {isLoggedIn ? (
-          <>
+          <div className="routeContainer">
             <Route exact path="/">
               <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
               <Profile userObj={userObj} refreshUser={refreshUser} />
             </Route>
-          </>
+          </div>
         ) : (
           <>
             <Route>
