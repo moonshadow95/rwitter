@@ -16,7 +16,7 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <RweetFactory userObj={userObj} />
       <div style={{ marginTop: 30 }}>
         {rweets.map((rweet) => (

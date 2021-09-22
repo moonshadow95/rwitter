@@ -37,7 +37,6 @@ const Rweet = ({ rweetObj, isOwner }) => {
       .update({ hashtag: newHashtag });
     setEditing(false);
   };
-
   return (
     <div className="rweet">
       {editing ? (
