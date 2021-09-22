@@ -76,6 +76,7 @@ const Profile = ({ userObj, refreshUser }) => {
   );
   const toggleEditing = () => {
     setEditing((prev) => !prev);
+    onClearAttachment();
   };
   const onFileChange = (event) => {
     const {
@@ -93,6 +94,13 @@ const Profile = ({ userObj, refreshUser }) => {
       };
     }
   };
+  const onClearAttachment = () => {
+    setAttachment("");
+    if (!fileInput.current) {
+      return;
+    }
+    fileInput.current.value = "";
+  };
   const getMyRweets = async () => {
     const rweets = await dbService
       .collection("rweets")
@@ -104,6 +112,9 @@ const Profile = ({ userObj, refreshUser }) => {
     setMyRweets(myRweetsArray);
   };
   const getTextLength = (ref) => {
+    if (!ref.current) {
+      return;
+    }
     const textLength = ref.current.value.length;
     switch (ref) {
       case nameRef:
@@ -131,100 +142,103 @@ const Profile = ({ userObj, refreshUser }) => {
   }, []);
   return (
     <>
-      <div>
+      {/* Edit Profile */}
+      {editing && (
         <div>
-          <form onSubmit={onSubmit}>
-            <div>
-              <span>
-                <FontAwesomeIcon icon={faTimes} />
-                Edit profile
-              </span>
-              <input type="submit" value="Save" />
-            </div>
-            <label htmlFor="attach-file">
-              <FontAwesomeIcon icon={faCameraRetro} size="1x" />
-            </label>
-            <input
-              ref={fileInput}
-              id="attach-file"
-              type="file"
-              accept="image/*"
-              onChange={onFileChange}
-              style={{
-                opacity: 0,
-              }}
-            />
-            {attachment ? (
-              <img src={attachment} alt="" />
-            ) : (
-              <FontAwesomeIcon icon={faUserCircle} size="9x" />
-            )}
-            <ul>
-              <li>
-                <div>
-                  <span>Name</span>
-                  <span>{nameLength} / 50</span>
-                </div>
-                <textarea
-                  ref={nameRef}
-                  name="name"
-                  type="text"
-                  placeholder="Display name"
-                  onChange={onChange}
-                  value={newDisplayName}
-                  maxLength={50}
-                  style={{ resize: "none" }}
-                />
-              </li>
-              <li>
-                <div>
-                  <span>Bio</span>
-                  <span>{bioLength} / 160</span>
-                </div>
-                <textarea
-                  ref={bioRef}
-                  name="bio"
-                  type="text"
-                  placeholder="Bio"
-                  onChange={onChange}
-                  maxLength={160}
-                  style={{ resize: "none" }}
-                />
-              </li>
-              <li>
-                <div>
-                  <span>Location</span>
-                  <span>{locationLength} / 30</span>
-                </div>
-                <textarea
-                  ref={locationRef}
-                  name="location"
-                  type="text"
-                  placeholder="Location"
-                  onChange={onChange}
-                  maxLength={30}
-                  style={{ resize: "none" }}
-                />
-              </li>
-              <li>
-                <div>
-                  <span>Website</span>
-                  <span>{websiteLength} / 100</span>
-                </div>
-                <textarea
-                  ref={websiteRef}
-                  name="website"
-                  type="text"
-                  placeholder="Website"
-                  onChange={onChange}
-                  maxLength={100}
-                  style={{ resize: "none" }}
-                />
-              </li>
-            </ul>
-          </form>
+          <div>
+            <form onSubmit={onSubmit}>
+              <div>
+                <span onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faTimes} />
+                  Edit profile
+                </span>
+                <input type="submit" value="Save" />
+              </div>
+              <label htmlFor="attach-file">
+                <FontAwesomeIcon icon={faCameraRetro} size="1x" />
+              </label>
+              <input
+                ref={fileInput}
+                id="attach-file"
+                type="file"
+                accept="image/*"
+                onChange={onFileChange}
+                style={{
+                  opacity: 0,
+                }}
+              />
+              {attachment ? (
+                <img src={attachment} alt="" />
+              ) : (
+                <FontAwesomeIcon icon={faUserCircle} size="9x" />
+              )}
+              <ul>
+                <li>
+                  <div>
+                    <span>Name</span>
+                    <span>{nameLength} / 50</span>
+                  </div>
+                  <textarea
+                    ref={nameRef}
+                    name="name"
+                    type="text"
+                    placeholder="Display name"
+                    onChange={onChange}
+                    value={newDisplayName}
+                    maxLength={50}
+                    style={{ resize: "none" }}
+                  />
+                </li>
+                <li>
+                  <div>
+                    <span>Bio</span>
+                    <span>{bioLength} / 160</span>
+                  </div>
+                  <textarea
+                    ref={bioRef}
+                    name="bio"
+                    type="text"
+                    placeholder="Bio"
+                    onChange={onChange}
+                    maxLength={160}
+                    style={{ resize: "none" }}
+                  />
+                </li>
+                <li>
+                  <div>
+                    <span>Location</span>
+                    <span>{locationLength} / 30</span>
+                  </div>
+                  <textarea
+                    ref={locationRef}
+                    name="location"
+                    type="text"
+                    placeholder="Location"
+                    onChange={onChange}
+                    maxLength={30}
+                    style={{ resize: "none" }}
+                  />
+                </li>
+                <li>
+                  <div>
+                    <span>Website</span>
+                    <span>{websiteLength} / 100</span>
+                  </div>
+                  <textarea
+                    ref={websiteRef}
+                    name="website"
+                    type="text"
+                    placeholder="Website"
+                    onChange={onChange}
+                    maxLength={100}
+                    style={{ resize: "none" }}
+                  />
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
       <div>
         <Link to="/">
           <FontAwesomeIcon icon={faLongArrowAltLeft} />
