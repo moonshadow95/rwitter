@@ -1,6 +1,9 @@
+import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory();
@@ -35,8 +38,18 @@ const Profile = ({ userObj, refreshUser }) => {
   useEffect(() => {
     getMyRweets();
   });
+
   return (
     <>
+      <div>
+        <Link to="/">
+          <FontAwesomeIcon icon={faLongArrowAltLeft} />
+        </Link>
+        <div>
+          <span>{userObj.displayName}</span>
+          <span></span>
+        </div>
+      </div>
       <form onSubmit={onSubmit}>
         <input
           type="text"

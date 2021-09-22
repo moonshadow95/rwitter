@@ -2,8 +2,9 @@ import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
 import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
+import { faFileImage } from "@fortawesome/free-regular-svg-icons";
 
 const RweetFactory = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
@@ -67,19 +68,18 @@ const RweetFactory = ({ userObj }) => {
     }
   };
   const onClearAttachment = () => {
-    setAttachment(null);
-    fileInput.current.value = null;
+    setAttachment("");
+    fileInput.current.value = "";
   };
 
   return (
-    <form onSubmit={onSubmit} className="factoryForm">
-      <div className="factoryInput__container">
+    <form onSubmit={onSubmit}>
+      <div>
         <input
-          className="factoryInput__input"
           value={rweet}
           onChange={onRweetChange}
           type="text"
-          placeholder="What's on your mind?"
+          placeholder="What's happening?"
           maxLength={120}
         />
         <input
@@ -89,13 +89,13 @@ const RweetFactory = ({ userObj }) => {
           placeholder="Hashtag splits by ,"
           maxLength={100}
         />
-        <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+        <input type="submit" value="Rweet" />
       </div>
-      <label htmlFor="attach-file" className="factoryInput__label">
-        <span>Add photos</span>
-        <FontAwesomeIcon icon={faPlus} />
+      <label htmlFor="attach-file">
+        <FontAwesomeIcon icon={faFileImage} size="1x" />
       </label>
       <input
+        ref={fileInput}
         id="attach-file"
         type="file"
         accept="image/*"
@@ -105,7 +105,7 @@ const RweetFactory = ({ userObj }) => {
         }}
       />
       {attachment && (
-        <div className="factoryForm__attachment">
+        <div>
           <img
             src={attachment}
             alt=""
@@ -113,8 +113,7 @@ const RweetFactory = ({ userObj }) => {
               backgroundImage: attachment,
             }}
           />
-          <div className="factoryForm__clear" onClick={onClearAttachment}>
-            <span>Remove</span>
+          <div onClick={onClearAttachment}>
             <FontAwesomeIcon icon={faTimes} />
           </div>
         </div>

@@ -57,6 +57,9 @@ const Rweet = ({ rweetObj, isOwner }) => {
               placeholder="Hashtag splits by ,"
               maxLength={100}
             />
+            {rweetObj.attachmentUrl && (
+              <img src={rweetObj.attachmentUrl} alt="" />
+            )}
             <input type="submit" value="Update Rweet" className="formBtn" />
           </form>
           <span onClick={toggleEditing} className="formBtn calcelBtn">
@@ -67,7 +70,10 @@ const Rweet = ({ rweetObj, isOwner }) => {
         <>
           <h4>{rweetObj.text}</h4>
           <ul>
-            {rweetObj.hashtag && rweetObj.hashtag.map((tag) => <li>{tag}</li>)}
+            {rweetObj.hashtag &&
+              rweetObj.hashtag.map((tag) => (
+                <li key={rweetObj.hashtag.indexOf(tag)}>{tag}</li>
+              ))}
           </ul>
           {rweetObj.attachmentUrl && (
             <img src={rweetObj.attachmentUrl} alt="" />
