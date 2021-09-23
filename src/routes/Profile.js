@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Rweet from "components/rweet/Rweet";
+import SearchForm from "components/searchForm/SearchForm";
 import { authService, dbService } from "fbase";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
@@ -283,6 +284,7 @@ const Profile = ({ userObj, refreshUser }) => {
           ))}
         </div>
       </div>
+      <SearchForm />
       {/* <button onClick={onLogOutClick}>Log Out</button> */}
     </>
   );

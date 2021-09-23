@@ -44,7 +44,6 @@ function App() {
           <li></li>
         </ul>
       )}
-      <footer>&copy; {new Date().getFullYear()} Rwitter</footer>
     </>
   );
 }
