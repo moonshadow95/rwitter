@@ -2,33 +2,81 @@ import {
   faCog,
   faEllipsisH,
   faSearch,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "components/footer/footer";
-import React, { useState } from "react";
+import { dbService } from "fbase";
+import React, { useRef, useState } from "react";
+import Rweet from "components/rweet/Rweet";
 
-const SearchForm = ({ rweets }) => {
+const SearchForm = () => {
+  const searchRef = useRef();
   const [showMore, setShowMore] = useState(false);
-  const [search, setSearch] = useState();
+  const [searching, setSearching] = useState(false);
+  const [searchedRweets, setSearchedRweets] = useState([]);
   const toggleShowMore = () => {
     setShowMore((prev) => !prev);
   };
-  console.log(rweets);
+  const getRweets = (keyword) => {
+    dbService.collection("rweets").onSnapshot((snapshot) => {
+      const rweetArray = snapshot.docs.map((doc) => ({ ...doc.data() }));
+      rweetArray.forEach((rweetObj) => {
+        const rweetKey = Object.keys(rweetObj).filter((key) => key === "text");
+        const isMatch = (obj) => obj[rweetKey].includes(keyword);
+        const matched = rweetArray.filter((rweet) => isMatch(rweet));
+        setSearchedRweets(matched);
+      });
+    });
+  };
+  const onChange = (event) => {
+    event.preventDefault();
+    if (searchRef.current.value !== "") {
+      const keyword = searchRef.current.value;
+      getRweets(keyword);
+    } else {
+      setSearchedRweets([]);
+    }
+  };
+  const onFocus = () => {
+    setSearching(true);
+  };
+  const onSearchOut = () => {
+    setSearching(false);
+  };
   return (
     <div>
       {/* search twitter */}
       <div>
-        <form>
+        <form onSubmit={onChange}>
           <div>
             <FontAwesomeIcon icon={faSearch} />
             <input
+              ref={searchRef}
               name="searhTerm"
-              value={search}
               type="text"
               placeholder="Search Rwitter"
+              onChange={onChange}
+              onFocus={onFocus}
             />
           </div>
         </form>
+        {searching && (
+          <div>
+            {searchedRweets.length === 0 ? (
+              <span>Try searching for a keyword</span>
+            ) : (
+              <>
+                {searchedRweets.map((rweet, index) => (
+                  <Rweet key={index} rweetObj={rweet} />
+                ))}
+              </>
+            )}
+            <span onClick={onSearchOut}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </div>
+        )}
       </div>
       {/* trends for you */}
       <div>
