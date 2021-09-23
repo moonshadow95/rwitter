@@ -2,18 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import {
-  faClipboardList,
-  faEllipsisH,
-  faHashtag,
-  faHome,
-  faUserAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faBell,
-  faBookmark,
-  faEnvelope,
-} from "@fortawesome/free-regular-svg-icons";
 
 const Navigation = ({ userObj }) => (
   <nav>
@@ -28,7 +16,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/">
-            <FontAwesomeIcon icon={faHome} size="3x" />
+            <img
+              src="https://img.icons8.com/windows/32/000000/home.png"
+              alt=""
+            />
             <span>Home</span>
           </Link>
         </span>
@@ -36,7 +27,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/explore">
-            <FontAwesomeIcon icon={faHashtag} size="3x" />
+            <img
+              src="https://img.icons8.com/ios-filled/32/000000/hashtag.png"
+              alt=""
+            />
             <span>Explore</span>
           </Link>
         </span>
@@ -44,7 +38,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/notifications">
-            <FontAwesomeIcon icon={faBell} size="3x" />
+            <img
+              src="https://img.icons8.com/ios/32/000000/appointment-reminders--v1.png"
+              alt=""
+            />
             <span>Notifications</span>
           </Link>
         </span>
@@ -52,7 +49,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/messages">
-            <FontAwesomeIcon icon={faEnvelope} size="3x" />
+            <img
+              src="https://img.icons8.com/fluency-systems-regular/32/000000/filled-message.png"
+              alt=""
+            />
             <span>Messages</span>
           </Link>
         </span>
@@ -60,7 +60,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/bookmarks">
-            <FontAwesomeIcon icon={faBookmark} size="3x" />
+            <img
+              src="https://img.icons8.com/material-outlined/32/000000/bookmark-ribbon--v1.png"
+              alt=""
+            />
             <span>Bookmarks</span>
           </Link>
         </span>
@@ -68,7 +71,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/lists">
-            <FontAwesomeIcon icon={faClipboardList} size="3x" />
+            <img
+              src="https://img.icons8.com/pastel-glyph/32/000000/file.png"
+              alt=""
+            />
             <span>Lists</span>
           </Link>
         </span>
@@ -76,7 +82,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/profile">
-            <FontAwesomeIcon icon={faUserAlt} size="3x" />
+            <img
+              src="https://img.icons8.com/material-outlined/32/000000/user--v1.png"
+              alt=""
+            />
             <span>Profile</span>
           </Link>
         </span>
@@ -84,7 +93,10 @@ const Navigation = ({ userObj }) => (
       <li>
         <span>
           <Link to="/more">
-            <FontAwesomeIcon icon={faEllipsisH} size="3x" />
+            <img
+              src="https://img.icons8.com/material-outlined/32/000000/connection-status-off.png"
+              alt=""
+            />
             <span>More</span>
           </Link>
         </span>
@@ -95,9 +107,13 @@ const Navigation = ({ userObj }) => (
     </div>
   </nav>
 );
+
 const rweetInput = document.getElementById("rweetInput");
 const rweetBtn = document.getElementById("rweetBtn");
-rweetBtn.addEventListener("click", () => {
-  rweetInput.focus();
-});
+if (rweetInput && rweetBtn) {
+  rweetBtn.addEventListener("click", () => {
+    rweetInput.focus();
+  });
+}
+
 export default Navigation;

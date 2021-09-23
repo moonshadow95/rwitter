@@ -32,7 +32,7 @@ const Home = ({ userObj }) => {
           ))}
         </div>
       </div>
-      <SearchForm />
+      <SearchForm rweets={rweets} />
     </div>
   );
 };

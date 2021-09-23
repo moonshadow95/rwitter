@@ -1,5 +1,4 @@
 import {
-  faCheckCircle,
   faCog,
   faEllipsisH,
   faSearch,
@@ -8,11 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "components/footer/footer";
 import React, { useState } from "react";
 
-const SearchForm = (props) => {
+const SearchForm = ({ rweets }) => {
   const [showMore, setShowMore] = useState(false);
+  const [search, setSearch] = useState();
   const toggleShowMore = () => {
     setShowMore((prev) => !prev);
   };
+  console.log(rweets);
   return (
     <div>
       {/* search twitter */}
@@ -20,7 +21,12 @@ const SearchForm = (props) => {
         <form>
           <div>
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search Twitter" />
+            <input
+              name="searhTerm"
+              value={search}
+              type="text"
+              placeholder="Search Rwitter"
+            />
           </div>
         </form>
       </div>
@@ -184,9 +190,11 @@ const SearchForm = (props) => {
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
               <div>
-                <span>
-                  노마드코더 <FontAwesomeIcon icon={faCheckCircle} />
-                </span>
+                <span>노마드코더</span>
+                <img
+                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
+                  alt=""
+                />
                 <br />
                 <span>@nomadcoders.co</span>
               </div>
@@ -201,9 +209,11 @@ const SearchForm = (props) => {
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
               <div>
-                <span>
-                  니꼬 <FontAwesomeIcon icon={faCheckCircle} />
-                </span>
+                <span>니꼬</span>
+                <img
+                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
+                  alt=""
+                />
                 <br />
                 <span>@nico.</span>
               </div>
@@ -218,9 +228,11 @@ const SearchForm = (props) => {
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
               <div>
-                <span>
-                  린 <FontAwesomeIcon icon={faCheckCircle} />
-                </span>
+                <span>린</span>
+                <img
+                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
+                  alt=""
+                />
                 <br />
                 <span>@lynn.</span>
               </div>

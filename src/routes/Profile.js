@@ -8,6 +8,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navigation from "components/navigator/Navigation";
 import Rweet from "components/rweet/Rweet";
 import SearchForm from "components/searchForm/SearchForm";
 import { authService, dbService } from "fbase";
@@ -143,6 +144,7 @@ const Profile = ({ userObj, refreshUser }) => {
   }, []);
   return (
     <>
+      <Navigation />
       {/* Edit Profile */}
       {editing && (
         <div>

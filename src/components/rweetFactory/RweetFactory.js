@@ -4,8 +4,8 @@ import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
-import { faFileImage, faSmile } from "@fortawesome/free-regular-svg-icons";
 import Picker from "emoji-picker-react";
+import LocationDisplay from "components/locationDisplay/LocationDisplay";
 
 const RweetFactory = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
@@ -76,7 +76,11 @@ const RweetFactory = ({ userObj }) => {
   };
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
-    setRweet((prev) => prev + chosenEmoji.emoji);
+    if (rweet) {
+      setRweet((prev) => prev + chosenEmoji.emoji);
+    } else {
+      setRweet(chosenEmoji.emoji);
+    }
   };
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
@@ -85,33 +89,56 @@ const RweetFactory = ({ userObj }) => {
   return (
     <form onSubmit={onSubmit}>
       <div>
-        <input
-          id="rweetInput"
-          value={rweet}
-          onChange={onRweetChange}
-          type="text"
-          placeholder="What's happening?"
-          maxLength={120}
+        <LocationDisplay />
+        <div>
+          <input
+            id="rweetInput"
+            value={rweet}
+            onChange={onRweetChange}
+            type="text"
+            placeholder="What's happening?"
+            maxLength={120}
+          />
+          <input
+            type="text"
+            value={hashtag}
+            onChange={onHashtagChange}
+            placeholder="Hashtag splits by ,"
+            maxLength={100}
+          />
+        </div>
+      </div>
+      <div>
+        <label htmlFor="attach-file">
+          <img
+            src="https://img.icons8.com/fluency-systems-regular/24/000000/image.png"
+            alt=""
+          />
+        </label>
+        <img
+          src="https://img.icons8.com/windows/24/000000/poll-horizontal.png"
+          alt=""
         />
-        <input
-          type="text"
-          value={hashtag}
-          onChange={onHashtagChange}
-          placeholder="Hashtag splits by ,"
-          maxLength={100}
+        <span onClick={onEmojiToggleClick}>
+          {!emojiToggle ? (
+            <img
+              src="https://img.icons8.com/ios-glyphs/24/000000/happy--v2.png"
+              alt=""
+            />
+          ) : (
+            <img
+              src="https://img.icons8.com/material-outlined/24/000000/close-window.png"
+              alt=""
+            />
+          )}
+        </span>
+        <img src="https://img.icons8.com/windows/24/000000/gif.png" alt="" />
+        <img
+          src="https://img.icons8.com/material-outlined/24/000000/overtime.png"
+          alt=""
         />
         <input type="submit" value="Rweet" />
       </div>
-      <label htmlFor="attach-file">
-        <FontAwesomeIcon icon={faFileImage} size="1x" />
-      </label>
-      <span onClick={onEmojiToggleClick}>
-        {!emojiToggle ? (
-          <FontAwesomeIcon icon={faSmile} />
-        ) : (
-          <FontAwesomeIcon icon={faTimes} />
-        )}
-      </span>
       {emojiToggle && (
         <div>
           <Picker onEmojiClick={onEmojiClick} />
@@ -124,7 +151,7 @@ const RweetFactory = ({ userObj }) => {
         accept="image/*"
         onChange={onFileChange}
         style={{
-          opacity: 0,
+          display: "none",
         }}
       />
       {attachment && (
