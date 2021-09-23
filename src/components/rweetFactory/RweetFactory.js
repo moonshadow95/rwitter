@@ -4,12 +4,16 @@ import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
-import { faFileImage } from "@fortawesome/free-regular-svg-icons";
+import { faFileImage, faSmile } from "@fortawesome/free-regular-svg-icons";
+import Picker from "emoji-picker-react";
 
 const RweetFactory = ({ userObj }) => {
+  const rweetRef = useRef();
   const [rweet, setRweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const [hashtag, setHashtag] = useState("");
+  const [emojiToggle, setEmojiToggle] = useState(false);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
   const fileInput = useRef();
   const onSubmit = async (event) => {
     let formatedHashtag;
@@ -71,11 +75,19 @@ const RweetFactory = ({ userObj }) => {
     setAttachment("");
     fileInput.current.value = "";
   };
+  const onEmojiClick = (event, emojiObject) => {
+    setChosenEmoji(emojiObject);
+    setRweet((prev) => prev + emojiObject.emoji);
+  };
+  const onEmojiToggleClick = () => {
+    setEmojiToggle((prev) => !prev);
+  };
 
   return (
     <form onSubmit={onSubmit}>
       <div>
         <input
+          ref={rweetRef}
           value={rweet}
           onChange={onRweetChange}
           type="text"
@@ -94,6 +106,18 @@ const RweetFactory = ({ userObj }) => {
       <label htmlFor="attach-file">
         <FontAwesomeIcon icon={faFileImage} size="1x" />
       </label>
+      <span onClick={onEmojiToggleClick}>
+        {!emojiToggle ? (
+          <FontAwesomeIcon icon={faSmile} />
+        ) : (
+          <FontAwesomeIcon icon={faTimes} />
+        )}
+      </span>
+      {emojiToggle && (
+        <div>
+          <Picker onEmojiClick={onEmojiClick} />
+        </div>
+      )}
       <input
         ref={fileInput}
         id="attach-file"
