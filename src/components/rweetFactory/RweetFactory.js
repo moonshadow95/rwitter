@@ -8,7 +8,6 @@ import { faFileImage, faSmile } from "@fortawesome/free-regular-svg-icons";
 import Picker from "emoji-picker-react";
 
 const RweetFactory = ({ userObj }) => {
-  const rweetRef = useRef();
   const [rweet, setRweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const [hashtag, setHashtag] = useState("");
@@ -77,7 +76,7 @@ const RweetFactory = ({ userObj }) => {
   };
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
-    setRweet((prev) => prev + emojiObject.emoji);
+    setRweet((prev) => prev + chosenEmoji.emoji);
   };
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
@@ -87,7 +86,7 @@ const RweetFactory = ({ userObj }) => {
     <form onSubmit={onSubmit}>
       <div>
         <input
-          ref={rweetRef}
+          id="rweetInput"
           value={rweet}
           onChange={onRweetChange}
           type="text"

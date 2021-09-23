@@ -90,7 +90,14 @@ const Navigation = ({ userObj }) => (
         </span>
       </li>
     </ul>
+    <div>
+      <span id="rweetBtn">Rweet</span>
+    </div>
   </nav>
 );
-
+const rweetInput = document.getElementById("rweetInput");
+const rweetBtn = document.getElementById("rweetBtn");
+rweetBtn.addEventListener("click", () => {
+  rweetInput.focus();
+});
 export default Navigation;
