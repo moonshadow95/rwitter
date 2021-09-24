@@ -85,93 +85,120 @@ const RweetFactory = ({ userObj }) => {
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
   };
+
   useEffect(() => {
     if (chosenEmoji) {
       setRweet((prev) => prev + chosenEmoji.emoji);
     }
   }, [chosenEmoji]);
+  useEffect(() => {
+    const submitBtn = document.getElementById("submitBtn");
+    const rweetInput = document.getElementById("rweetInput");
+    const submitInput = document.getElementById("submitInput");
+    if (rweetInput.value) {
+      submitBtn.style.opacity = "1";
+      submitBtn.style.cursor = "pointer";
+      submitInput.style.opacity = "1";
+      submitInput.style.cursor = "pointer";
+    } else {
+      submitBtn.style.opacity = "0.6";
+      submitBtn.style.cursor = "auto";
+      submitInput.style.opacity = "0.6";
+      submitInput.style.cursor = "auto";
+    }
+  });
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <div>
-        <LocationDisplay />
-        <div className={styles.outer__container}>
-          <div className={styles.avatar}>
-            <img src={userObj.photoURL} alt="" />
-          </div>
-          <div className={styles.input__container}>
-            <div className={styles.inner__container}>
-              <textarea
-                id="rweetInput"
-                className={styles.input__rweet}
-                value={rweet}
-                onChange={onRweetChange}
-                type="text"
-                placeholder="What's happening?"
-                maxLength={120}
-              />
-              {attachment && (
-                <div className={styles.attachment__container}>
-                  <img
-                    className={styles.upload__image}
-                    src={attachment}
-                    alt=""
-                    style={{
-                      backgroundImage: attachment,
-                    }}
-                  />
-                  <div
-                    onClick={onClearAttachment}
-                    className={styles.remove__btn}
-                  >
-                    <FontAwesomeIcon icon={faTimes} />
-                  </div>
-                </div>
-              )}
-            </div>
-            <input
+      <LocationDisplay />
+      <div className={styles.outer__container}>
+        <div className={styles.avatar}>
+          <img src={userObj.photoURL} alt="" />
+        </div>
+        <div className={styles.input__container}>
+          <div className={styles.inner__container}>
+            <textarea
+              id="rweetInput"
+              className={styles.input__rweet}
+              value={rweet}
+              onChange={onRweetChange}
               type="text"
-              className={styles.input__hashtag}
-              value={hashtag}
-              onChange={onHashtagChange}
-              placeholder="Hashtag splits by comma"
-              maxLength={30}
+              placeholder="What's happening?"
+              maxLength={120}
             />
+            {attachment && (
+              <div className={styles.attachment__container}>
+                <img
+                  className={styles.upload__image}
+                  src={attachment}
+                  alt=""
+                  style={{
+                    backgroundImage: attachment,
+                  }}
+                />
+                <div onClick={onClearAttachment} className={styles.remove__btn}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </div>
+              </div>
+            )}
           </div>
+          <input
+            type="text"
+            className={styles.input__hashtag}
+            value={hashtag}
+            onChange={onHashtagChange}
+            placeholder="Hashtag splits by comma"
+            maxLength={30}
+          />
         </div>
       </div>
-      <div>
-        <label htmlFor="attach-file">
+      <div className={styles.icon__container}>
+        <span className={styles.icon}>
+          <label htmlFor="attach-file">
+            <img
+              src="https://img.icons8.com/fluency-systems-regular/24/000000/image.png"
+              alt=""
+            />
+          </label>
+        </span>
+        <span className={styles.icon}>
+          <img src="https://img.icons8.com/windows/22/000000/gif.png" alt="" />
+        </span>
+        <span className={styles.icon}>
           <img
-            src="https://img.icons8.com/fluency-systems-regular/24/000000/image.png"
+            src="https://img.icons8.com/windows/24/000000/poll-horizontal.png"
             alt=""
           />
-        </label>
-        <img
-          src="https://img.icons8.com/windows/24/000000/poll-horizontal.png"
-          alt=""
-        />
-        <span onClick={onEmojiToggleClick}>
+        </span>
+        <span className={styles.icon} onClick={onEmojiToggleClick}>
           {!emojiToggle ? (
             <img
-              src="https://img.icons8.com/ios-glyphs/24/000000/happy--v2.png"
+              src="https://img.icons8.com/ios-glyphs/22/000000/happy--v2.png"
               alt=""
             />
           ) : (
             <img
-              src="https://img.icons8.com/material-outlined/24/000000/close-window.png"
+              src="https://img.icons8.com/material-outlined/22/000000/close-window.png"
               alt=""
             />
           )}
         </span>
-        <img src="https://img.icons8.com/windows/24/000000/gif.png" alt="" />
-        <img
-          src="https://img.icons8.com/material-outlined/24/000000/overtime.png"
-          alt=""
-        />
-        <input type="submit" value="Rweet" />
+        <span className={styles.icon}>
+          <img
+            src="https://img.icons8.com/material-outlined/21/000000/overtime.png"
+            alt=""
+          />
+        </span>
+        <span id="submitBtn" className={styles.submit__btn}>
+          <input
+            id="submitInput"
+            className={styles.submit__input}
+            type="submit"
+            value="Rweet"
+          />
+        </span>
       </div>
       {emojiToggle && (
-        <div>
+        <div className={styles.emoji__picker}>
           <Picker onEmojiClick={onEmojiClick} />
         </div>
       )}
