@@ -291,4 +291,5 @@ const Profile = ({ userObj, refreshUser }) => {
     </>
   );
 };
+
 export default Profile;

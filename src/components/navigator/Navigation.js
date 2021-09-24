@@ -26,14 +26,12 @@ const Navigation = ({ userObj }) => (
         </span>
       </li>
       <li>
-        <span>
-          <Link to="/explore">
-            <img
-              src="https://img.icons8.com/ios-filled/32/000000/hashtag.png"
-              alt=""
-            />
-            <span>Explore</span>
-          </Link>
+        <span id="explore">
+          <img
+            src="https://img.icons8.com/ios-filled/32/000000/hashtag.png"
+            alt=""
+          />
+          <span>Explore</span>
         </span>
       </li>
       <li>
@@ -93,13 +91,11 @@ const Navigation = ({ userObj }) => (
       </li>
       <li>
         <span>
-          <Link to="/more">
-            <img
-              src="https://img.icons8.com/material-outlined/32/000000/connection-status-off.png"
-              alt=""
-            />
-            <span>More</span>
-          </Link>
+          <img
+            src="https://img.icons8.com/material-outlined/32/000000/connection-status-off.png"
+            alt=""
+          />
+          <span>More</span>
         </span>
       </li>
     </ul>
@@ -109,15 +105,87 @@ const Navigation = ({ userObj }) => (
     <div>
       <Logout photoURL={userObj?.photoURL} displayName={userObj?.displayName} />
     </div>
+    <div>
+      <ul>
+        <li>
+          <img
+            src="https://img.icons8.com/material-outlined/24/000000/speech-bubble--v1.png"
+            alt=""
+          />
+          <span>Topics</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/small/24/000000/lightning-bolt.png"
+            alt=""
+          />
+          <span>Moments</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/material-outlined/24/000000/news.png"
+            alt=""
+          />
+          <span>Newsletters</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/windows/24/000000/shortcut.png"
+            alt=""
+          />
+          <span>Rwitter Ads</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/windows/24/000000/poll-vertical.png"
+            alt=""
+          />
+          <span>Analystics</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/ios/24/000000/settings--v1.png"
+            alt=""
+          />
+          <span>Settings and privacy</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/ios/24/000000/ask-question.png"
+            alt=""
+          />
+          <span>Help Center</span>
+        </li>
+        <li>
+          <img
+            src="https://img.icons8.com/windows/24/000000/paint.png"
+            alt=""
+          />
+          <span>Display</span>
+        </li>
+        <li>
+          <img src="https://img.icons8.com/ios/24/000000/pin-2.png" alt="" />
+          <span>Keyboard shortcuts</span>
+        </li>
+      </ul>
+    </div>
   </nav>
 );
 
 const rweetInput = document.getElementById("rweetInput");
 const rweetBtn = document.getElementById("rweetBtn");
+const searchInput = document.getElementById("search_input");
+const explore = document.getElementById("explore");
+
 if (rweetInput && rweetBtn) {
   rweetBtn.addEventListener("click", () => {
     rweetInput.focus();
   });
 }
 
+if (explore) {
+  explore.addEventListener("click", () => {
+    searchInput.focus();
+  });
+}
 export default Navigation;

@@ -50,8 +50,12 @@ const SearchForm = () => {
       <div>
         <form onSubmit={onChange}>
           <div>
-            <FontAwesomeIcon icon={faSearch} />
+            <img
+              src="https://img.icons8.com/ios-glyphs/22/000000/search--v1.png"
+              alt=""
+            />
             <input
+              id="search_input"
               ref={searchRef}
               name="searhTerm"
               type="text"
@@ -243,7 +247,6 @@ const SearchForm = () => {
                   src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
                   alt=""
                 />
-                <br />
                 <span>@nomadcoders.co</span>
               </div>
               <div>
@@ -262,7 +265,6 @@ const SearchForm = () => {
                   src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
                   alt=""
                 />
-                <br />
                 <span>@nico.</span>
               </div>
               <div>
@@ -281,7 +283,6 @@ const SearchForm = () => {
                   src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
                   alt=""
                 />
-                <br />
                 <span>@lynn.</span>
               </div>
               <div>
