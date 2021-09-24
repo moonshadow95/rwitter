@@ -14,6 +14,7 @@ const RweetFactory = ({ userObj }) => {
   const [emojiToggle, setEmojiToggle] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const fileInput = useRef();
+  console.log(userObj);
   const onSubmit = async (event) => {
     let formatedHashtag;
     if (rweet === "") {

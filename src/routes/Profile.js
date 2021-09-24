@@ -1,7 +1,4 @@
-import {
-  faCalendarAlt,
-  faUserCircle,
-} from "@fortawesome/free-regular-svg-icons";
+import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
 import {
   faCameraRetro,
   faLongArrowAltLeft,
@@ -13,12 +10,10 @@ import Rweet from "components/rweet/Rweet";
 import SearchForm from "components/searchForm/SearchForm";
 import { authService, dbService, storageService } from "fbase";
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const Profile = ({ userObj, refreshUser }) => {
-  const history = useHistory();
   const fileInput = useRef();
   const nameRef = useRef();
   const bioRef = useRef();
@@ -29,17 +24,12 @@ const Profile = ({ userObj, refreshUser }) => {
   const [locationLength, setLocationLength] = useState();
   const [websiteLength, setWebsiteLength] = useState();
   const [attachment, setAttachment] = useState("");
-  const [photoUrl, setPhotoUrl] = useState(userObj.photoURL);
+  const [photoURL, setPhotoURL] = useState(userObj.photoURL);
   const [editing, setEditing] = useState(false);
   const [myRweets, setMyRweets] = useState([]);
   const [rweetLength, setRweetLength] = useState("0");
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [userEmail] = useState(authService.currentUser.email);
-
-  const onLogOutClick = () => {
-    authService.signOut();
-    history.push("/");
-  };
   const onChange = (event) => {
     const {
       target: { value, name },
@@ -77,7 +67,7 @@ const Profile = ({ userObj, refreshUser }) => {
       });
       refreshUser();
       console.log(userObj.photoURL);
-      setPhotoUrl(userObj.photoURL);
+      setPhotoURL(userObj.photoURL);
     }
     if (userObj.displayName !== newDisplayName) {
       await userObj.updateProfile({
@@ -187,16 +177,14 @@ const Profile = ({ userObj, refreshUser }) => {
               />
               {attachment ? (
                 <img src={attachment} alt="" />
-              ) : photoUrl ? (
-                <img src={photoUrl} alt="" />
               ) : (
-                <FontAwesomeIcon icon={faUserCircle} size="9x" />
+                photoURL && <img src={photoURL} alt="" />
               )}
               <ul>
                 <li>
                   <div>
                     <span>Name</span>
-                    <span>{nameLength} / 50</span>
+                    <span>{nameLength || "0"} / 50</span>
                   </div>
                   <textarea
                     ref={nameRef}
@@ -212,7 +200,7 @@ const Profile = ({ userObj, refreshUser }) => {
                 <li>
                   <div>
                     <span>Bio</span>
-                    <span>{bioLength} / 160</span>
+                    <span>{bioLength || "0"} / 160</span>
                   </div>
                   <textarea
                     ref={bioRef}
@@ -227,7 +215,7 @@ const Profile = ({ userObj, refreshUser }) => {
                 <li>
                   <div>
                     <span>Location</span>
-                    <span>{locationLength} / 30</span>
+                    <span>{locationLength || "0"} / 30</span>
                   </div>
                   <textarea
                     ref={locationRef}
@@ -242,7 +230,7 @@ const Profile = ({ userObj, refreshUser }) => {
                 <li>
                   <div>
                     <span>Website</span>
-                    <span>{websiteLength} / 100</span>
+                    <span>{websiteLength || "0"} / 100</span>
                   </div>
                   <textarea
                     ref={websiteRef}
@@ -271,11 +259,7 @@ const Profile = ({ userObj, refreshUser }) => {
       </div>
       <div>
         <div>
-          {photoUrl ? (
-            <img src={photoUrl} alt="" />
-          ) : (
-            <FontAwesomeIcon icon={faUserCircle} size="9x" />
-          )}
+          <img src={photoURL} alt="" />
           <div>
             <button onClick={toggleEditing}>Edit profile</button>
           </div>
@@ -304,7 +288,6 @@ const Profile = ({ userObj, refreshUser }) => {
         </div>
       </div>
       <SearchForm />
-      {/* <button onClick={onLogOutClick}>Log Out</button> */}
     </>
   );
 };

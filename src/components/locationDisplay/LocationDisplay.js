@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const LocationDisplay = ({ userObj, refreshUser }) => {
+const LocationDisplay = () => {
   const [location, setLocation] = useState(window.location.hash);
 
   const getLocation = () => {

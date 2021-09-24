@@ -107,7 +107,7 @@ const Navigation = ({ userObj }) => (
       <span id="rweetBtn">Rweet</span>
     </div>
     <div>
-      <Logout userObj={userObj} />
+      <Logout photoURL={userObj?.photoURL} displayName={userObj?.displayName} />
     </div>
   </nav>
 );
