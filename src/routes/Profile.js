@@ -5,9 +5,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navigation from "components/navigator/Navigation";
 import Rweet from "components/rweet/Rweet";
-import SearchForm from "components/searchForm/SearchForm";
 import { authService, dbService, storageService } from "fbase";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -146,10 +144,9 @@ const Profile = ({ userObj, refreshUser }) => {
     getTextLength(bioRef);
     getTextLength(locationRef);
     getTextLength(websiteRef);
-  }, []);
+  });
   return (
     <>
-      <Navigation />
       {/* Edit Profile */}
       {editing && (
         <div>
@@ -287,7 +284,6 @@ const Profile = ({ userObj, refreshUser }) => {
           ))}
         </div>
       </div>
-      <SearchForm />
     </>
   );
 };

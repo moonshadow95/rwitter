@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from "./location.module.css";
 
 const LocationDisplay = () => {
   const [location, setLocation] = useState(window.location.hash);
@@ -27,8 +28,12 @@ const LocationDisplay = () => {
   };
   useEffect(() => {
     getLocation();
-  }, []);
-  return <span>{location}</span>;
+  });
+  return (
+    <div className={styles.container}>
+      <span>{location}</span>
+    </div>
+  );
 };
 
 export default LocationDisplay;

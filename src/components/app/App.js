@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
+import "./reset.css";
 import styles from "./app.module.css";
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     });
   };
   return (
-    <>
+    <div className={styles.container}>
       {init ? (
         <AppRouter
           refreshUser={refreshUser}
@@ -48,7 +49,7 @@ function App() {
           <li></li>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

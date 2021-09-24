@@ -1,14 +1,10 @@
-import {
-  faCog,
-  faEllipsisH,
-  faSearch,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCog, faEllipsisH, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "components/footer/footer";
 import { dbService } from "fbase";
 import React, { useRef, useState } from "react";
 import Rweet from "components/rweet/Rweet";
+import styles from "./search.module.css";
 
 const SearchForm = () => {
   const searchRef = useRef();
@@ -45,7 +41,7 @@ const SearchForm = () => {
     setSearching(false);
   };
   return (
-    <div>
+    <div className={styles.container}>
       {/* search twitter */}
       <div>
         <form onSubmit={onChange}>

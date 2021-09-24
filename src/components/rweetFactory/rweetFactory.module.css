@@ -1,0 +1,79 @@
+.form {
+  margin-top: 55px;
+}
+.form input,
+form textarea {
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-size: 1.2rem;
+  resize: none;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+}
+.outer__container {
+  display: flex;
+  padding: 0 0.5em;
+}
+.avatar {
+  display: flex;
+  border: 1px solid #000;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: 0.5em;
+}
+.input__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0 0.8em;
+  padding-top: 1.2em;
+}
+.input__rweet {
+  word-break: break-all;
+  width: 100%;
+}
+.inner__container {
+  border-bottom: 1px solid #000;
+}
+.attachment__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 18px;
+  width: 100%;
+  overflow: hidden;
+  max-height: 18.5em;
+  margin-bottom: 1em;
+}
+.upload__image {
+  width: 100%;
+  max-width: 100%;
+}
+.remove__btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  top: 0.5em;
+  left: 0.5em;
+  cursor: pointer;
+}
+.remove__btn:hover {
+  opacity: 0.7;
+}
+.input__hashtag {
+  padding-top: 1em;
+  height: 2em;
+  font-size: 1rem !important;
+}

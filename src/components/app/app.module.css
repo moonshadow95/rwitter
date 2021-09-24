@@ -97,3 +97,8 @@
     opacity: 0.87;
   }
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+}

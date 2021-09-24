@@ -1,20 +1,20 @@
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
-import React, { useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef, useState } from "react";
 import { formatHashtags } from "hashtagFormatter";
 import Picker from "emoji-picker-react";
 import LocationDisplay from "components/locationDisplay/LocationDisplay";
+import styles from "./rweetFactory.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const RweetFactory = ({ userObj }) => {
   const [rweet, setRweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [emojiToggle, setEmojiToggle] = useState(false);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
+  const [chosenEmoji, setChosenEmoji] = useState("");
   const fileInput = useRef();
-  console.log(userObj);
   const onSubmit = async (event) => {
     let formatedHashtag;
     if (rweet === "") {
@@ -45,9 +45,13 @@ const RweetFactory = ({ userObj }) => {
   };
   const onRweetChange = (event) => {
     const {
+      target,
       target: { value },
     } = event;
     setRweet(value);
+    console.log(rweet);
+    target.style.height = "1px";
+    target.style.height = `${target.scrollHeight + 25}px`;
   };
   const onHashtagChange = (event) => {
     const {
@@ -77,36 +81,62 @@ const RweetFactory = ({ userObj }) => {
   };
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
-    if (rweet) {
-      setRweet((prev) => prev + chosenEmoji.emoji);
-    } else {
-      setRweet(chosenEmoji.emoji);
-    }
   };
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
   };
-
+  useEffect(() => {
+    if (chosenEmoji) {
+      setRweet((prev) => prev + chosenEmoji.emoji);
+    }
+  }, [chosenEmoji]);
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={styles.form}>
       <div>
         <LocationDisplay />
-        <div>
-          <input
-            id="rweetInput"
-            value={rweet}
-            onChange={onRweetChange}
-            type="text"
-            placeholder="What's happening?"
-            maxLength={120}
-          />
-          <input
-            type="text"
-            value={hashtag}
-            onChange={onHashtagChange}
-            placeholder="Hashtag splits by ,"
-            maxLength={100}
-          />
+        <div className={styles.outer__container}>
+          <div className={styles.avatar}>
+            <img src={userObj.photoURL} alt="" />
+          </div>
+          <div className={styles.input__container}>
+            <div className={styles.inner__container}>
+              <textarea
+                id="rweetInput"
+                className={styles.input__rweet}
+                value={rweet}
+                onChange={onRweetChange}
+                type="text"
+                placeholder="What's happening?"
+                maxLength={120}
+              />
+              {attachment && (
+                <div className={styles.attachment__container}>
+                  <img
+                    className={styles.upload__image}
+                    src={attachment}
+                    alt=""
+                    style={{
+                      backgroundImage: attachment,
+                    }}
+                  />
+                  <div
+                    onClick={onClearAttachment}
+                    className={styles.remove__btn}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                </div>
+              )}
+            </div>
+            <input
+              type="text"
+              className={styles.input__hashtag}
+              value={hashtag}
+              onChange={onHashtagChange}
+              placeholder="Hashtag splits by comma"
+              maxLength={30}
+            />
+          </div>
         </div>
       </div>
       <div>
@@ -155,20 +185,6 @@ const RweetFactory = ({ userObj }) => {
           display: "none",
         }}
       />
-      {attachment && (
-        <div>
-          <img
-            src={attachment}
-            alt=""
-            style={{
-              backgroundImage: attachment,
-            }}
-          />
-          <div onClick={onClearAttachment}>
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
-        </div>
-      )}
     </form>
   );
 };
