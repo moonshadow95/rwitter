@@ -10,8 +10,9 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
-          displayName: user.displayName ? user.displayName : "Rwitter",
+          displayName: user.displayName ? user.displayName : "Anonymous User",
           uid: user.uid,
+          photoURL: authService.currentUser.photoURL,
           updateProfile: (args) => user.updateProfile(args),
         });
       } else {
@@ -25,6 +26,7 @@ function App() {
     setUserObj({
       displayName: user.displayName,
       uid: user.uid,
+      photoURL: user.photoURL,
       updateProfile: (args) => user.updateProfile(args),
     });
   };

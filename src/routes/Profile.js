@@ -11,10 +11,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navigation from "components/navigator/Navigation";
 import Rweet from "components/rweet/Rweet";
 import SearchForm from "components/searchForm/SearchForm";
-import { authService, dbService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory();
@@ -28,12 +29,13 @@ const Profile = ({ userObj, refreshUser }) => {
   const [locationLength, setLocationLength] = useState();
   const [websiteLength, setWebsiteLength] = useState();
   const [attachment, setAttachment] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(userObj.photoURL);
   const [editing, setEditing] = useState(false);
   const [myRweets, setMyRweets] = useState([]);
   const [rweetLength, setRweetLength] = useState("0");
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [userEmail] = useState(authService.currentUser.email);
-  const [avatarUrl, setAvatarUrl] = useState(authService.currentUser.photoURL);
+
   const onLogOutClick = () => {
     authService.signOut();
     history.push("/");
@@ -64,6 +66,19 @@ const Profile = ({ userObj, refreshUser }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (attachment) {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      const attachmentUrl = await response.ref.getDownloadURL();
+      await userObj.updateProfile({
+        photoURL: attachmentUrl,
+      });
+      refreshUser();
+      console.log(userObj.photoURL);
+      setPhotoUrl(userObj.photoURL);
+    }
     if (userObj.displayName !== newDisplayName) {
       await userObj.updateProfile({
         displayName: newDisplayName,
@@ -172,6 +187,8 @@ const Profile = ({ userObj, refreshUser }) => {
               />
               {attachment ? (
                 <img src={attachment} alt="" />
+              ) : photoUrl ? (
+                <img src={photoUrl} alt="" />
               ) : (
                 <FontAwesomeIcon icon={faUserCircle} size="9x" />
               )}
@@ -254,8 +271,8 @@ const Profile = ({ userObj, refreshUser }) => {
       </div>
       <div>
         <div>
-          {avatarUrl ? (
-            <img src={avatarUrl} alt="" />
+          {photoUrl ? (
+            <img src={photoUrl} alt="" />
           ) : (
             <FontAwesomeIcon icon={faUserCircle} size="9x" />
           )}

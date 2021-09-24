@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Logout from "components/logout/Logout";
 
 const Navigation = ({ userObj }) => (
   <nav>
@@ -104,6 +105,9 @@ const Navigation = ({ userObj }) => (
     </ul>
     <div>
       <span id="rweetBtn">Rweet</span>
+    </div>
+    <div>
+      <Logout userObj={userObj} />
     </div>
   </nav>
 );
