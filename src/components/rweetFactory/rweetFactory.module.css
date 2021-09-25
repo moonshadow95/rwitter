@@ -106,6 +106,9 @@ label img {
 .icon:hover {
   border: 1px solid #000;
 }
+.icon:hover.icon__incomplete {
+  background: rgb(247, 165, 165);
+}
 .submit__btn {
   display: flex;
   align-items: center;

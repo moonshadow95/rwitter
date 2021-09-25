@@ -98,6 +98,7 @@ const RweetFactory = ({ userObj }) => {
     const submitBtn = document.getElementById("submitBtn");
     const rweetInput = document.getElementById("rweetInput");
     const submitInput = document.getElementById("submitInput");
+
     if (rweetInput.value) {
       submitBtn.style.opacity = "1";
       submitBtn.style.cursor = "pointer";
@@ -163,10 +164,10 @@ const RweetFactory = ({ userObj }) => {
             />
           </label>
         </span>
-        <span className={styles.icon}>
+        <span className={`${styles.icon} ${styles.icon__incomplete}`}>
           <img src="https://img.icons8.com/windows/22/000000/gif.png" alt="" />
         </span>
-        <span className={styles.icon}>
+        <span className={`${styles.icon} ${styles.icon__incomplete}`}>
           <img
             src="https://img.icons8.com/windows/24/000000/poll-horizontal.png"
             alt=""
@@ -193,7 +194,7 @@ const RweetFactory = ({ userObj }) => {
             </div>
           )}
         </span>
-        <span className={styles.icon}>
+        <span className={`${styles.icon} ${styles.icon__incomplete}`}>
           <img
             src="https://img.icons8.com/material-outlined/21/000000/overtime.png"
             alt=""
