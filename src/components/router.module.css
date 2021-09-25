@@ -4,14 +4,17 @@
   align-items: center;
 }
 .nav__container {
-  width: 23%;
+  height: 100%;
+  border-right: 1px solid #000;
+  width: 22%;
 }
 .main {
   position: relative;
   height: 100%;
-  width: 45%;
+  width: 53%;
   border-right: 1px solid #000;
 }
 .search__container {
-  width: 32%;
+  width: 25%;
+  height: 100%;
 }

@@ -1,17 +1,17 @@
 nav {
-  border-right: 1px solid #000;
+  position: fixed;
+  height: 100%;
 }
 .list {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
 }
 .list__item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 0.5em;
-  padding-left: 2.2em;
+  cursor: pointer;
   padding-bottom: 1.4em;
 }
 .list__item:first-child {
@@ -26,8 +26,26 @@ nav {
 .list__item:last-child:hover {
   opacity: unset;
 }
-.list__item:hover {
+.list__item:hover span span {
   opacity: 0.7;
+}
+.list__item:hover .menu__hover {
+  animation: menu__hover 200ms forwards ease-in alternate;
+}
+.menu__hover {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  background: #000;
+}
+@keyframes menu__hover {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 .item__icon {
   margin-right: 1em;
@@ -35,12 +53,16 @@ nav {
 .item__text {
   font-size: 1.2rem;
 }
+.item__text span {
+  position: relative;
+}
 .item__text,
 .item__text a {
   display: flex;
   width: 100%;
   align-items: center;
 }
+
 .rweet_btn {
   display: flex;
   justify-content: center;
@@ -48,14 +70,49 @@ nav {
 .rweet_btn span {
   display: block;
   text-align: center;
-  width: 45%;
+  width: 180px;
   border: 1px solid #000;
   font-size: 1.1rem;
   font-weight: 500;
   padding: 0.8em 0;
+  transition: all 200ms ease-in-out;
   cursor: pointer;
 }
 .rweet_btn span:hover {
   color: #fff;
   background: #000;
+}
+.logout__btn {
+  position: absolute;
+  bottom: 0;
+}
+.more__btn {
+  position: relative;
+}
+.more__container {
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  bottom: 0;
+  font-size: 0.9rem;
+  width: 200px;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+  padding: 20px 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.more__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.more__item {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+}
+.analystics {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000;
 }

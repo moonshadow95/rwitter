@@ -41,7 +41,10 @@ const RweetFactory = ({ userObj }) => {
     };
     await dbService.collection("rweets").add(rweetObj);
     setRweet("");
+    setHashtag("");
     setAttachment("");
+    setChosenEmoji("");
+    setEmojiToggle(false);
   };
   const onRweetChange = (event) => {
     const {
@@ -169,7 +172,10 @@ const RweetFactory = ({ userObj }) => {
             alt=""
           />
         </span>
-        <span className={styles.icon} onClick={onEmojiToggleClick}>
+        <span
+          className={`${styles.icon} ${styles.emoji__btn}`}
+          onClick={onEmojiToggleClick}
+        >
           {!emojiToggle ? (
             <img
               src="https://img.icons8.com/ios-glyphs/22/000000/happy--v2.png"
@@ -180,6 +186,11 @@ const RweetFactory = ({ userObj }) => {
               src="https://img.icons8.com/material-outlined/22/000000/close-window.png"
               alt=""
             />
+          )}
+          {emojiToggle && (
+            <div className={styles.emoji__picker}>
+              <Picker onEmojiClick={onEmojiClick} />
+            </div>
           )}
         </span>
         <span className={styles.icon}>
@@ -197,11 +208,7 @@ const RweetFactory = ({ userObj }) => {
           />
         </span>
       </div>
-      {emojiToggle && (
-        <div className={styles.emoji__picker}>
-          <Picker onEmojiClick={onEmojiClick} />
-        </div>
-      )}
+
       <input
         ref={fileInput}
         id="attach-file"
