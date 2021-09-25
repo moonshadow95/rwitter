@@ -3,6 +3,7 @@ import { dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
+import styles from "./rweet.module.css";
 
 const Rweet = ({ rweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -12,7 +13,9 @@ const Rweet = ({ rweetObj, isOwner }) => {
     const ok = window.confirm("Are you sure?");
     if (ok) {
       await dbService.doc(`rweets/${rweetObj.id}`).delete();
-      await storageService.refFromURL(rweetObj.attachmentUrl).delete();
+      if (rweetObj.attachmentUrl) {
+        await storageService.refFromURL(rweetObj.attachmentUrl).delete();
+      }
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
@@ -37,6 +40,25 @@ const Rweet = ({ rweetObj, isOwner }) => {
       .update({ hashtag: newHashtag });
     setEditing(false);
   };
+  const displayedAt = (createdAt) => {
+    const milliSeconds = new Date() - createdAt;
+    const seconds = milliSeconds / 1000;
+    if (seconds < 60) return `방금 전`;
+    const minutes = seconds / 60;
+    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+    const hours = minutes / 60;
+    if (hours < 24) return `${Math.floor(hours)}시간 전`;
+    const days = hours / 24;
+    if (days < 2) return `${Math.floor(days)}일 전`;
+    if (days >= 2) {
+      const dateObj = new Date(createdAt);
+      const year = dateObj.getFullYear();
+      const month = dateObj.getMonth() + 1;
+      const date = dateObj.getDate();
+      return `${year}년 ${month}월 ${date}일`;
+    }
+  };
+  const displayDate = displayedAt(rweetObj.createdAt);
   return (
     <div className="rweet">
       {editing ? (
@@ -66,19 +88,66 @@ const Rweet = ({ rweetObj, isOwner }) => {
           </span>
         </>
       ) : (
-        <>
-          <h4>{rweetObj.text}</h4>
-          <ul>
-            {rweetObj.hashtag &&
-              rweetObj.hashtag.map((tag) => (
-                <li key={rweetObj.hashtag.indexOf(tag)}>{tag}</li>
-              ))}
-          </ul>
-          {rweetObj.attachmentUrl && (
-            <img src={rweetObj.attachmentUrl} alt="" />
-          )}
+        <div className={styles.container}>
+          <div className={styles.creator__photo}>
+            <img src={rweetObj.creatorPhoto} alt="" />
+          </div>
+          <div className={styles.inner__container}>
+            <div className={styles.creator__info}>
+              <span className={styles.username}>{rweetObj.creatorName}</span>
+              <span className={styles.email}>{rweetObj.creatorEmail}</span>·
+              <span className={styles.created}>{displayDate}</span>
+            </div>
+            <div className={styles.content}>
+              <h4 className={styles.text}>{rweetObj.text}</h4>
+              <ul className={styles.list}>
+                {rweetObj.hashtag &&
+                  rweetObj.hashtag.map((tag) => (
+                    <li
+                      className={styles.item}
+                      key={rweetObj.hashtag.indexOf(tag)}
+                    >
+                      {tag}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+            <div className={styles.attachment__container}>
+              {rweetObj.attachmentUrl && (
+                <img src={rweetObj.attachmentUrl} alt="" />
+              )}
+            </div>
+            <div className={styles.buttons}>
+              <ul className={styles.button__list}>
+                <li className={styles.button__item}>
+                  <img
+                    src="https://img.icons8.com/material-outlined/20/000000/speech-bubble--v2.png"
+                    alt=""
+                  />
+                </li>
+                <li className={styles.button__item}>
+                  <img
+                    src="https://img.icons8.com/material-sharp/20/000000/retweet.png"
+                    alt=""
+                  />
+                </li>
+                <li className={styles.button__item}>
+                  <img
+                    src="https://img.icons8.com/material-outlined/20/000000/like--v1.png"
+                    alt=""
+                  />
+                </li>
+                <li className={styles.button__item}>
+                  <img
+                    src="https://img.icons8.com/pastel-glyph/20/000000/upload--v1.png"
+                    alt=""
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
           {isOwner && (
-            <div className="rweet__actions">
+            <div className={styles.edit__container}>
               <span onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faTrashAlt} />
               </span>
@@ -87,7 +156,7 @@ const Rweet = ({ rweetObj, isOwner }) => {
               </span>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

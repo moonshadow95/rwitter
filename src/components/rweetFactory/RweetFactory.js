@@ -35,6 +35,9 @@ const RweetFactory = ({ userObj }) => {
     const rweetObj = {
       text: rweet,
       createdAt: Date.now(),
+      creatorPhoto: userObj.photoURL,
+      creatorName: userObj.displayName,
+      creatorEmail: userObj.email,
       creatorId: userObj.uid,
       hashtag: formatedHashtag,
       attachmentUrl,
@@ -52,7 +55,6 @@ const RweetFactory = ({ userObj }) => {
       target: { value },
     } = event;
     setRweet(value);
-    console.log(rweet);
     target.style.height = "1px";
     target.style.height = `${target.scrollHeight + 25}px`;
   };
@@ -88,7 +90,7 @@ const RweetFactory = ({ userObj }) => {
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
   };
-
+  console.log(attachment);
   useEffect(() => {
     if (chosenEmoji) {
       setRweet((prev) => prev + chosenEmoji.emoji);
@@ -110,7 +112,7 @@ const RweetFactory = ({ userObj }) => {
       submitInput.style.opacity = "0.6";
       submitInput.style.cursor = "auto";
     }
-  });
+  }, [rweet]);
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <LocationDisplay />
@@ -131,14 +133,7 @@ const RweetFactory = ({ userObj }) => {
             />
             {attachment && (
               <div className={styles.attachment__container}>
-                <img
-                  className={styles.upload__image}
-                  src={attachment}
-                  alt=""
-                  style={{
-                    backgroundImage: attachment,
-                  }}
-                />
+                <img className={styles.upload__image} src={attachment} alt="" />
                 <div onClick={onClearAttachment} className={styles.remove__btn}>
                   <FontAwesomeIcon icon={faTimes} />
                 </div>

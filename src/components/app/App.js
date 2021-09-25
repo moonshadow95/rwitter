@@ -15,6 +15,7 @@ function App() {
         setUserObj({
           displayName: user.displayName ? user.displayName : "Anonymous User",
           uid: user.uid,
+          email: user.email,
           photoURL: authService.currentUser.photoURL || defaultURL,
           updateProfile: (args) => user.updateProfile(args),
         });
@@ -30,6 +31,7 @@ function App() {
       displayName: user.displayName,
       uid: user.uid,
       photoURL: user.photoURL || defaultURL,
+      email: user.email,
       updateProfile: (args) => user.updateProfile(args),
     });
   };

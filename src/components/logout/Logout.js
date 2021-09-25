@@ -39,11 +39,9 @@ const Logout = ({ photoURL, displayName }) => {
         <div className={styles.right}></div>
         <div className={styles.bottom}></div>
         <div className={styles.left}></div>
-        <img
-          className={styles.avatar}
-          src={photoURL || profileUserObj.photoURL}
-          alt=""
-        />
+        <div className={styles.avatar}>
+          <img src={photoURL || profileUserObj.photoURL} alt="" />
+        </div>
         <div className={styles.userinfo}>
           <span className={styles.username}>
             {displayName || profileUserObj.displayName || "Anonymous User"}

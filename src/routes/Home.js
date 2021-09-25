@@ -19,7 +19,7 @@ const Home = ({ userObj }) => {
     <div>
       <div>
         <RweetFactory userObj={userObj} />
-        <div style={{ marginTop: 30 }}>
+        <div>
           {rweets.map((rweet) => (
             <Rweet
               key={rweet.id}

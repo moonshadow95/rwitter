@@ -8,8 +8,18 @@
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  padding: 15px 15px;
+  padding: 15px 8px;
   cursor: pointer;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.avatar img {
+  width: 100%;
 }
 .userinfo {
   display: flex;
@@ -19,12 +29,12 @@
 }
 .username {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   white-space: nowrap;
   margin-right: 8px;
 }
 .email {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 .ellipsis {
   align-self: flex-start;

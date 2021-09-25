@@ -1,6 +1,6 @@
 .form {
-  margin-top: 55px;
-  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
 }
 .form input,
 form textarea {
@@ -20,13 +20,16 @@ textarea:focus {
 }
 .avatar {
   display: flex;
-  border: 1px solid #000;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   margin-top: 0.5em;
+  overflow: hidden;
+}
+.avatar img {
+  width: 100%;
 }
 .input__container {
   display: flex;
@@ -49,7 +52,7 @@ textarea:focus {
   border-radius: 18px;
   width: 100%;
   overflow: hidden;
-  max-height: 18.5em;
+  max-height: 380px;
   margin-bottom: 1em;
 }
 .upload__image {
@@ -98,6 +101,7 @@ textarea:focus {
   box-sizing: border-box;
   border: 1px solid #fff;
   cursor: pointer;
+  transition: all 200ms ease-in-out;
 }
 label img {
   margin-bottom: -4px;
@@ -107,7 +111,7 @@ label img {
   border: 1px solid #000;
 }
 .icon:hover.icon__incomplete {
-  background: rgb(247, 165, 165);
+  background: rgb(230, 107, 107);
 }
 .submit__btn {
   display: flex;
