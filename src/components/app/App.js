@@ -36,7 +36,7 @@ function App() {
     });
   };
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${init || styles.notinit}`}>
       {init ? (
         <AppRouter
           refreshUser={refreshUser}

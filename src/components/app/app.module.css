@@ -3,6 +3,9 @@
   align-items: center;
   justify-content: center;
 }
+.container.notinit {
+  height: 100vh;
+}
 .spinner {
   font-size: 100px;
   width: 100px;
@@ -12,6 +15,7 @@
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  transform: scale(1.5);
 }
 
 .spinner li {

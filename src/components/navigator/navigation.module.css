@@ -1,9 +1,7 @@
 .nav {
   height: 100%;
 }
-a:visited {
-  color: #000;
-}
+
 .list__item {
   display: flex;
   flex-direction: column;
@@ -59,6 +57,7 @@ a:visited {
   display: flex;
   width: 100%;
   align-items: center;
+  color: #000;
 }
 
 .rweet_btn {
