@@ -1,6 +1,9 @@
 .nav {
   height: 100%;
 }
+a:visited {
+  color: #000;
+}
 .list__item {
   display: flex;
   flex-direction: column;
