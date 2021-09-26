@@ -21,3 +21,6 @@
   color: #fff;
   background: rgb(44, 44, 44);
 }
+.button span {
+  pointer-events: none;
+}
