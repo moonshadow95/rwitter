@@ -44,7 +44,7 @@ const AuthForm = () => {
   return (
     <div className={styles.container}>
       <div className={styles.image}>
-        <img src="/image/login_bg.png" alt="" />
+        <img src="image/login_bg.png" alt="" />
         <FontAwesomeIcon className={styles.icon} icon={faTwitter} />
       </div>
       <div className={styles.auth__container}>

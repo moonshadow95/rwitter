@@ -270,7 +270,7 @@ const SearchForm = () => {
             <a href="https://nomadcoders.co/" target="_blank">
               <div className={styles.follow__container}>
                 <div className={styles.follow__img}>
-                  <img src="/image/nomadcoders.svg" alt="" />
+                  <img src="image/nomadcoders.svg" alt="" />
                 </div>
                 <div className={styles.follow__content}>
                   <span className={styles.strong}>
@@ -292,7 +292,7 @@ const SearchForm = () => {
           <li className={`${styles.item} ${styles.incomplete}`}>
             <div className={styles.follow__container}>
               <div className={styles.follow__img}>
-                <img src="/image/nomadcoders.svg" alt="" />
+                <img src="image/nomadcoders.svg" alt="" />
               </div>
               <div className={styles.follow__content}>
                 <span className={styles.strong}>
@@ -313,7 +313,7 @@ const SearchForm = () => {
           <li className={`${styles.item} ${styles.incomplete}`}>
             <div className={styles.follow__container}>
               <div className={styles.follow__img}>
-                <img src="/image/nomadcoders.svg" alt="" />
+                <img src="image/nomadcoders.svg" alt="" />
               </div>
               <div className={styles.follow__content}>
                 <span className={styles.strong}>
