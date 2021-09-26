@@ -76,6 +76,12 @@ const Rweet = ({ rweetObj, isOwner }) => {
         await dbService
           .doc(`rweets/${rweetObj.id}`)
           .update({ like: rweetObj.like });
+      } else {
+        rweetObj.like.pop();
+        console.log(rweetObj.like);
+        await dbService
+          .doc(`rweets/${rweetObj.id}`)
+          .update({ like: rweetObj.like });
       }
     }
   };
