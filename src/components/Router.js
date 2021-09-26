@@ -1,12 +1,8 @@
-import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
-import Bookmarks from "./menu/bookmarks/Bookmarks";
-import Lists from "./menu/lists/Lists";
-import Messages from "./menu/messages/Messages";
-import Notifications from "./menu/notifications/Notifications";
+
 import Navigation from "./navigator/Navigation";
 import SearchForm from "./searchForm/SearchForm";
 import styles from "./router.module.css";

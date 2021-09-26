@@ -1,6 +1,10 @@
 .container {
+  position: absolute;
+  bottom: 0;
   margin-bottom: 15px;
   background: #fff;
+  width: 100%;
+  padding: 10px 24px;
 }
 .btn {
   display: flex;
@@ -48,12 +52,11 @@
   position: absolute;
   border: 1px solid #000;
   bottom: calc(100% + 20px);
-  right: -10px;
+  left: 0;
   z-index: 1;
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms ease-in-out;
-  background: #fff;
 }
 .popup > div:nth-child(2):hover {
   background: rgb(247, 165, 165);
@@ -62,12 +65,14 @@
   padding: 20px 25px;
   padding-bottom: 15px;
   border-bottom: 1px solid #000;
+  background: #fff;
 }
 .logout__btn {
   font-size: 0.9rem;
   cursor: pointer;
   padding: 20px 15px;
   transition: color 200ms ease-in-out;
+  background: #fff;
 }
 .logout__btn:hover {
   position: relative;

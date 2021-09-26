@@ -52,6 +52,7 @@ textarea:focus {
   align-items: center;
   border-radius: 18px;
   width: 100%;
+  max-width: fit-content;
   overflow: hidden;
   max-height: 380px;
   margin-bottom: 1em;
@@ -88,9 +89,10 @@ textarea:focus {
 .icon__container {
   display: flex;
   align-items: center;
-  margin-left: 68px;
-  margin-right: 25px;
+  padding-left: 68px;
+  padding-right: 25px;
   padding-bottom: 0.5em;
+  border-bottom: 1px solid #000;
 }
 .icon {
   display: flex;
@@ -142,8 +144,8 @@ label img {
 }
 .emoji__picker {
   position: absolute;
+  z-index: 999;
   top: 28px;
   left: 5px;
   box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.5);
-  transition: all 250ms ease-in;
 }

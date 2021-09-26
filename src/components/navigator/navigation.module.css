@@ -1,10 +1,5 @@
-nav {
-  position: fixed;
+.nav {
   height: 100%;
-}
-.list {
-  display: flex;
-  flex-direction: column;
 }
 .list__item {
   display: flex;
@@ -82,10 +77,8 @@ nav {
   color: #fff;
   background: #000;
 }
-.logout__btn {
-  position: absolute;
-  bottom: 0;
-}
+/* logout */
+
 .more__btn {
   position: relative;
 }
@@ -115,4 +108,10 @@ nav {
 .analystics {
   padding-bottom: 20px;
   border-bottom: 1px solid #000;
+}
+
+/* incomplete */
+.incomplete:hover {
+  background: rgb(230, 107, 107);
+  opacity: 0.7;
 }

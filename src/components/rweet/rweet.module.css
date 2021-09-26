@@ -6,9 +6,13 @@
   display: flex;
   position: relative;
   padding: 15px 15px 0 15px;
+  margin-top: -1px;
   width: 100%;
   border: 1px solid #000;
   border-bottom: none;
+}
+.container:last-child {
+  border-bottom: 1px solid #000;
 }
 .creator {
   display: flex;
@@ -107,7 +111,15 @@
 .icon:hover.icon__incomplete {
   background: rgb(230, 107, 107);
 }
-
+.like__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+.like {
+  font-size: 0.8rem;
+}
 /* Edit */
 input {
   border: none;
@@ -129,6 +141,9 @@ input {
 }
 .edit__attachment {
   margin-bottom: 14px;
+}
+.cancel {
+  cursor: pointer;
 }
 .submit__btn {
   display: flex;

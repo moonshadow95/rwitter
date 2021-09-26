@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./location.module.css";
 
 const LocationDisplay = () => {
-  const [location, setLocation] = useState(window.location.hash);
-
-  const getLocation = () => {
-    switch (location) {
-      case "#/explore":
-        setLocation("Explore");
-        break;
-      case "#/notifications":
-        setLocation("Notifications");
-        break;
-      case "#/messages":
-        setLocation("Messages");
-        break;
-      case "#/bookmarks":
-        setLocation("Bookmarks");
-        break;
-      case "#/lists":
-        setLocation("Lists");
-        break;
-      default:
-        setLocation("Home");
-        break;
-    }
-  };
+  const [url, setUrl] = useState();
   useEffect(() => {
-    getLocation();
-  });
+    setUrl(window.location.hash);
+    const nav = document.querySelector("nav");
+    nav.addEventListener("click", () => {
+      setTimeout(() => {
+        setUrl(window.location.hash);
+      });
+    });
+  }, []);
   return (
     <div className={styles.container}>
-      <span>{location}</span>
+      <span>
+        {url === "#/" && "Home"}
+        {url === "#/profile" && "Profile"}
+      </span>
     </div>
   );
 };

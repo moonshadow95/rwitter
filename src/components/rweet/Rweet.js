@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dbService, storageService } from "fbase";
+import { authService, dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
@@ -60,6 +60,26 @@ const Rweet = ({ rweetObj, isOwner }) => {
     }
   };
   const displayDate = displayedAt(rweetObj.createdAt);
+
+  const onLikeClick = async () => {
+    if (rweetObj.like.length <= 0) {
+      rweetObj.like.push(authService.currentUser.uid);
+      await dbService
+        .doc(`rweets/${rweetObj.id}`)
+        .update({ like: rweetObj.like });
+    } else {
+      const isLiked = rweetObj.like.every(
+        (uid) => uid === authService.currentUser.uid
+      );
+      if (!isLiked) {
+        rweetObj.like.push(authService.currentUser.uid);
+        await dbService
+          .doc(`rweets/${rweetObj.id}`)
+          .update({ like: rweetObj.like });
+      }
+    }
+  };
+
   return (
     <div className="rweet">
       {editing ? (
@@ -110,8 +130,10 @@ const Rweet = ({ rweetObj, isOwner }) => {
               )}
             </div>
           </div>
-          <span onClick={toggleEditing} className="formBtn calcelBtn">
-            <FontAwesomeIcon icon={faTimes} />
+          <span onClick={toggleEditing}>
+            <span className={styles.cancel}>
+              <FontAwesomeIcon icon={faTimes} />{" "}
+            </span>
           </span>
         </div>
       ) : (
@@ -162,13 +184,17 @@ const Rweet = ({ rweetObj, isOwner }) => {
                     />
                   </span>
                 </li>
-                <li className={styles.button__item}>
+                <li
+                  className={`${styles.button__item} ${styles.like__container}`}
+                  onClick={onLikeClick}
+                >
                   <span className={`${styles.icon} ${styles.icon__incomplete}`}>
                     <img
                       src="https://img.icons8.com/material-outlined/20/000000/like--v1.png"
                       alt=""
                     />
                   </span>
+                  <span className={styles.like}>{rweetObj.like.length}</span>
                 </li>
                 <li className={styles.button__item}>
                   <span className={`${styles.icon} ${styles.icon__incomplete}`}>

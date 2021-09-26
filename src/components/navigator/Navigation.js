@@ -36,7 +36,7 @@ const Navigation = ({ userObj }) => {
     }
   });
   return (
-    <nav>
+    <nav className={styles.nav}>
       {/* Menu */}
       <ul className={styles.list}>
         <li className={styles.list__item}>
@@ -78,64 +78,56 @@ const Navigation = ({ userObj }) => {
             </span>
           </span>
         </li>
-        <li className={styles.list__item}>
+        <li className={`${styles.list__item} ${styles.incomplete}`}>
           <span className={styles.item__text}>
-            <Link to="/notifications">
-              <img
-                className={styles.item__icon}
-                src="https://img.icons8.com/ios/28/000000/appointment-reminders--v1.png"
-                alt=""
-              />
-              <span>
-                Notifications
-                <div className={styles.menu__hover}></div>
-              </span>
-            </Link>
+            <img
+              className={styles.item__icon}
+              src="https://img.icons8.com/ios/28/000000/appointment-reminders--v1.png"
+              alt=""
+            />
+            <span>
+              Notifications
+              <div className={styles.menu__hover}></div>
+            </span>
           </span>
         </li>
-        <li className={styles.list__item}>
+        <li className={`${styles.list__item} ${styles.incomplete}`}>
           <span className={styles.item__text}>
-            <Link to="/messages">
-              <img
-                className={styles.item__icon}
-                src="https://img.icons8.com/fluency-systems-regular/28/000000/filled-message.png"
-                alt=""
-              />
-              <span>
-                Messages
-                <div className={styles.menu__hover}></div>
-              </span>
-            </Link>
+            <img
+              className={styles.item__icon}
+              src="https://img.icons8.com/fluency-systems-regular/28/000000/filled-message.png"
+              alt=""
+            />
+            <span>
+              Messages
+              <div className={styles.menu__hover}></div>
+            </span>
           </span>
         </li>
-        <li className={styles.list__item}>
+        <li className={`${styles.list__item} ${styles.incomplete}`}>
           <span className={styles.item__text}>
-            <Link to="/bookmarks">
-              <img
-                className={styles.item__icon}
-                src="https://img.icons8.com/small/28/000000/bookmark-ribbon.png"
-                alt=""
-              />
-              <span>
-                Bookmarks
-                <div className={styles.menu__hover}></div>
-              </span>
-            </Link>
+            <img
+              className={styles.item__icon}
+              src="https://img.icons8.com/small/28/000000/bookmark-ribbon.png"
+              alt=""
+            />
+            <span>
+              Bookmarks
+              <div className={styles.menu__hover}></div>
+            </span>
           </span>
         </li>
-        <li className={styles.list__item}>
+        <li className={`${styles.list__item} ${styles.incomplete}`}>
           <span className={styles.item__text}>
-            <Link to="/lists">
-              <img
-                className={styles.item__icon}
-                src="https://img.icons8.com/pastel-glyph/28/000000/file.png"
-                alt=""
-              />
-              <span>
-                Lists
-                <div className={styles.menu__hover}></div>
-              </span>
-            </Link>
+            <img
+              className={styles.item__icon}
+              src="https://img.icons8.com/pastel-glyph/28/000000/file.png"
+              alt=""
+            />
+            <span>
+              Lists
+              <div className={styles.menu__hover}></div>
+            </span>
           </span>
         </li>
         <li className={styles.list__item}>

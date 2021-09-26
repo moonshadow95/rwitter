@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useRef, useState } from "react";
 import { formatHashtags } from "hashtagFormatter";
 import Picker from "emoji-picker-react";
-import LocationDisplay from "components/locationDisplay/LocationDisplay";
 import styles from "./rweetFactory.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -40,6 +39,7 @@ const RweetFactory = ({ userObj }) => {
       creatorEmail: userObj.email,
       creatorId: userObj.uid,
       hashtag: formatedHashtag,
+      like: [],
       attachmentUrl,
     };
     await dbService.collection("rweets").add(rweetObj);
@@ -90,7 +90,7 @@ const RweetFactory = ({ userObj }) => {
   const onEmojiToggleClick = () => {
     setEmojiToggle((prev) => !prev);
   };
-  console.log(attachment);
+
   useEffect(() => {
     if (chosenEmoji) {
       setRweet((prev) => prev + chosenEmoji.emoji);
@@ -113,6 +113,7 @@ const RweetFactory = ({ userObj }) => {
       submitInput.style.cursor = "auto";
     }
   }, [rweet]);
+
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <div className={styles.outer__container}>

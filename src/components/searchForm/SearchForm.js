@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import {
   faCheck,
   faEllipsisH,
@@ -56,6 +57,7 @@ const SearchForm = () => {
             />
             <input
               id="search_input"
+              className={styles.search__input}
               ref={searchRef}
               name="searhTerm"
               type="text"
@@ -67,18 +69,19 @@ const SearchForm = () => {
         </form>
         {searching && (
           <div className={styles.hover__container}>
-            {searchedRweets.length === 0 ? (
+            <div className={styles.hover__text}>
               <span>Try searching for a keyword</span>
-            ) : (
+              <span className={styles.search__cancel} onClick={onSearchOut}>
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
+            </div>
+            {searchedRweets.length !== 0 && (
               <div className={styles.result__container}>
                 {searchedRweets.map((rweet, index) => (
                   <Rweet key={index} rweetObj={rweet} />
                 ))}
               </div>
             )}
-            <span onClick={onSearchOut}>
-              <FontAwesomeIcon icon={faTimes} />
-            </span>
           </div>
         )}
       </div>
@@ -93,16 +96,18 @@ const SearchForm = () => {
         </div>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <div className={styles.small}>
-              <span>Trending in South Korea</span>
-              <FontAwesomeIcon icon={faEllipsisH} />
-            </div>
-            <div className={styles.strong}>
-              <span>노마드코더</span>
-            </div>
-            <div className={styles.small}>
-              <span>5,586 Tweets</span>
-            </div>
+            <a href="https://nomadcoders.co/" target="_blank">
+              <div className={styles.small}>
+                <span>Trending in South Korea</span>
+                <FontAwesomeIcon icon={faEllipsisH} />
+              </div>
+              <div className={styles.strong}>
+                <span>노마드코더</span>
+              </div>
+              <div className={styles.small}>
+                <span>5,586 Tweets</span>
+              </div>
+            </a>
           </li>
           <li className={`${styles.item} ${styles.incomplete}`}>
             <div className={styles.small}>
@@ -129,28 +134,32 @@ const SearchForm = () => {
             </div>
           </li>
           <li className={styles.item}>
-            <div className={styles.small}>
-              <span>Trending in South Korea</span>
-              <FontAwesomeIcon icon={faEllipsisH} />
-            </div>
-            <div className={styles.strong}>
-              <span>리액트</span>
-            </div>
-            <div className={styles.small}>
-              <span>4,316 Tweets</span>
-            </div>
+            <a href="https://nomadcoders.co/nwitter" target="_blank">
+              <div className={styles.small}>
+                <span>Trending in South Korea</span>
+                <FontAwesomeIcon icon={faEllipsisH} />
+              </div>
+              <div className={styles.strong}>
+                <span>리액트</span>
+              </div>
+              <div className={styles.small}>
+                <span>4,316 Tweets</span>
+              </div>
+            </a>
           </li>
           <li className={styles.item}>
-            <div className={styles.small}>
-              <span>Trending in South Korea</span>
-              <FontAwesomeIcon icon={faEllipsisH} />
-            </div>
-            <div className={styles.strong}>
-              <span>파이어베이스</span>
-            </div>
-            <div className={styles.small}>
-              <span>1,546 Tweets</span>
-            </div>
+            <a href="https://nomadcoders.co/nwitter" target="_blank">
+              <div className={styles.small}>
+                <span>Trending in South Korea</span>
+                <FontAwesomeIcon icon={faEllipsisH} />
+              </div>
+              <div className={styles.strong}>
+                <span>파이어베이스</span>
+              </div>
+              <div className={styles.small}>
+                <span>1,546 Tweets</span>
+              </div>
+            </a>
           </li>
           {showMore && (
             <>
@@ -167,52 +176,72 @@ const SearchForm = () => {
                 </div>
               </li>
               <li className={styles.item}>
-                <div className={styles.small}>
-                  <span>Trending in South Korea</span>
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </div>
-                <div className={styles.strong}>
-                  <span>아두이노</span>
-                </div>
-                <div className={styles.small}>
-                  <span>895 Tweets</span>
-                </div>
+                <a
+                  href="https://www.youtube.com/watch?v=3up-M863_2M&t=3s"
+                  target="_blank"
+                >
+                  <div className={styles.small}>
+                    <span>Trending in South Korea</span>
+                    <FontAwesomeIcon icon={faEllipsisH} />
+                  </div>
+                  <div className={styles.strong}>
+                    <span>아두이노</span>
+                  </div>
+                  <div className={styles.small}>
+                    <span>895 Tweets</span>
+                  </div>
+                </a>
               </li>
               <li className={styles.item}>
-                <div className={styles.small}>
-                  <span>Trending in South Korea</span>
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </div>
-                <div className={styles.strong}>
-                  <span>자바스크립트</span>
-                </div>
-                <div className={styles.small}>
-                  <span>6,246 Tweets</span>
-                </div>
+                <a
+                  href="https://nomadcoders.co/es6-once-and-for-all"
+                  target="_blank"
+                >
+                  <div className={styles.small}>
+                    <span>Trending in South Korea</span>
+                    <FontAwesomeIcon icon={faEllipsisH} />
+                  </div>
+                  <div className={styles.strong}>
+                    <span>자바스크립트</span>
+                  </div>
+                  <div className={styles.small}>
+                    <span>6,246 Tweets</span>
+                  </div>
+                </a>
               </li>
               <li className={styles.item}>
-                <div className={styles.small}>
-                  <span>Trending in South Korea</span>
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </div>
-                <div className={styles.strong}>
-                  <span>김치 좋아</span>
-                </div>
-                <div className={styles.small}>
-                  <span>5,441 Tweets</span>
-                </div>
+                <a
+                  href="https://namu.wiki/w/%EA%B9%80%EC%B9%98"
+                  target="_blank"
+                >
+                  <div className={styles.small}>
+                    <span>Trending in South Korea</span>
+                    <FontAwesomeIcon icon={faEllipsisH} />
+                  </div>
+                  <div className={styles.strong}>
+                    <span>김치 좋아</span>
+                  </div>
+                  <div className={styles.small}>
+                    <span>5,441 Tweets</span>
+                  </div>
+                </a>
               </li>
               <li className={styles.item}>
-                <div className={styles.small}>
-                  <span>Trending in South Korea</span>
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </div>
-                <div className={styles.strong}>
-                  <span>감자 좋아</span>
-                </div>
-                <div className={styles.small}>
-                  <span>3,824 Tweets</span>
-                </div>
+                <a
+                  href="https://namu.wiki/w/%EA%B0%90%EC%9E%90"
+                  target="_blank"
+                >
+                  <div className={styles.small}>
+                    <span>Trending in South Korea</span>
+                    <FontAwesomeIcon icon={faEllipsisH} />
+                  </div>
+                  <div className={styles.strong}>
+                    <span>감자 좋아</span>
+                  </div>
+                  <div className={styles.small}>
+                    <span>3,824 Tweets</span>
+                  </div>
+                </a>
               </li>
             </>
           )}
@@ -238,25 +267,27 @@ const SearchForm = () => {
         </div>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <div className={styles.follow__container}>
-              <div className={styles.follow__img}>
-                <img src="/image/nomadcoders.svg" alt="" />
+            <a href="https://nomadcoders.co/" target="_blank">
+              <div className={styles.follow__container}>
+                <div className={styles.follow__img}>
+                  <img src="/image/nomadcoders.svg" alt="" />
+                </div>
+                <div className={styles.follow__content}>
+                  <span className={styles.strong}>
+                    노마드코더
+                    <FontAwesomeIcon
+                      className={styles.check}
+                      icon={faCheck}
+                      size="xs"
+                    />
+                  </span>
+                  <span className={styles.small}>@nomadcoders.co</span>
+                </div>
+                <div className={styles.follow__btn}>
+                  <span>Follow</span>
+                </div>
               </div>
-              <div className={styles.follow__content}>
-                <span className={styles.strong}>
-                  노마드코더
-                  <FontAwesomeIcon
-                    className={styles.check}
-                    icon={faCheck}
-                    size="xs"
-                  />
-                </span>
-                <span className={styles.small}>@nomadcoders.co</span>
-              </div>
-              <div className={styles.follow__btn}>
-                <span>Follow</span>
-              </div>
-            </div>
+            </a>
           </li>
           <li className={`${styles.item} ${styles.incomplete}`}>
             <div className={styles.follow__container}>
