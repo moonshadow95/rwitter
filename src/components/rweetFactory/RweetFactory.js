@@ -115,7 +115,6 @@ const RweetFactory = ({ userObj }) => {
   }, [rweet]);
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <LocationDisplay />
       <div className={styles.outer__container}>
         <div className={styles.avatar}>
           <img src={userObj.photoURL} alt="" />
@@ -141,8 +140,8 @@ const RweetFactory = ({ userObj }) => {
             )}
           </div>
           <input
-            type="text"
             className={styles.input__hashtag}
+            type="text"
             value={hashtag}
             onChange={onHashtagChange}
             placeholder="Hashtag splits by comma"

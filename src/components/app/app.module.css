@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .spinner {
   font-size: 100px;
   width: 100px;
@@ -96,9 +101,4 @@
   91.0% {
     opacity: 0.87;
   }
-}
-
-.container {
-  display: flex;
-  justify-content: center;
 }

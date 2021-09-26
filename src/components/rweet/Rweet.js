@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { formatHashtags } from "hashtagFormatter";
 import styles from "./rweet.module.css";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Rweet = ({ rweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -62,31 +63,57 @@ const Rweet = ({ rweetObj, isOwner }) => {
   return (
     <div className="rweet">
       {editing ? (
-        <>
-          <form onSubmit={onSubmit} className="container rweetEdit">
-            <input
-              type="text"
-              placeholder="Edit Rweet"
-              value={newRweet}
-              onChange={onRweetChange}
-              required
-            />
-            <input
-              type="text"
-              value={newHashtag}
-              onChange={onHashtagChange}
-              placeholder="Hashtag splits by ,"
-              maxLength={100}
-            />
-            {rweetObj.attachmentUrl && (
-              <img src={rweetObj.attachmentUrl} alt="" />
-            )}
-            <input type="submit" value="Update Rweet" className="formBtn" />
-          </form>
+        <div className={styles.container}>
+          <div className={styles.creator__photo}>
+            <img src={rweetObj.creatorPhoto} alt="" />
+          </div>
+          <div className={styles.inner__container}>
+            <div className={styles.creator__info}>
+              <span className={styles.username}>{rweetObj.creatorName}</span>
+              <span className={styles.email}>{rweetObj.creatorEmail}</span>·
+              <span className={styles.created}>{displayDate}</span>
+            </div>
+            <div className={styles.content}>
+              <form onSubmit={onSubmit}>
+                <textarea
+                  className={styles.input__rweet}
+                  type="text"
+                  placeholder="Edit Rweet"
+                  value={newRweet}
+                  onChange={onRweetChange}
+                  required
+                  maxLength={120}
+                />
+                <input
+                  className={styles.input__hashtag}
+                  type="text"
+                  value={newHashtag}
+                  onChange={onHashtagChange}
+                  placeholder="Edit Hashtags"
+                  maxLength={30}
+                />
+                <span id="submitBtn" className={styles.submit__btn}>
+                  <input
+                    id="submitInput"
+                    className={styles.submit__input}
+                    type="submit"
+                    value="Update Rweet"
+                  />
+                </span>
+              </form>
+            </div>
+            <div
+              className={`${styles.attachment__container} ${styles.edit__attachment}`}
+            >
+              {rweetObj.attachmentUrl && (
+                <img src={rweetObj.attachmentUrl} alt="" />
+              )}
+            </div>
+          </div>
           <span onClick={toggleEditing} className="formBtn calcelBtn">
-            Cancel
+            <FontAwesomeIcon icon={faTimes} />
           </span>
-        </>
+        </div>
       ) : (
         <div className={styles.container}>
           <div className={styles.creator__photo}>
@@ -120,28 +147,36 @@ const Rweet = ({ rweetObj, isOwner }) => {
             <div className={styles.buttons}>
               <ul className={styles.button__list}>
                 <li className={styles.button__item}>
-                  <img
-                    src="https://img.icons8.com/material-outlined/20/000000/speech-bubble--v2.png"
-                    alt=""
-                  />
+                  <span className={`${styles.icon} ${styles.icon__incomplete}`}>
+                    <img
+                      src="https://img.icons8.com/material-outlined/20/000000/speech-bubble--v2.png"
+                      alt=""
+                    />
+                  </span>
                 </li>
                 <li className={styles.button__item}>
-                  <img
-                    src="https://img.icons8.com/material-sharp/20/000000/retweet.png"
-                    alt=""
-                  />
+                  <span className={`${styles.icon} ${styles.icon__incomplete}`}>
+                    <img
+                      src="https://img.icons8.com/material-sharp/20/000000/retweet.png"
+                      alt=""
+                    />
+                  </span>
                 </li>
                 <li className={styles.button__item}>
-                  <img
-                    src="https://img.icons8.com/material-outlined/20/000000/like--v1.png"
-                    alt=""
-                  />
+                  <span className={`${styles.icon} ${styles.icon__incomplete}`}>
+                    <img
+                      src="https://img.icons8.com/material-outlined/20/000000/like--v1.png"
+                      alt=""
+                    />
+                  </span>
                 </li>
                 <li className={styles.button__item}>
-                  <img
-                    src="https://img.icons8.com/pastel-glyph/20/000000/upload--v1.png"
-                    alt=""
-                  />
+                  <span className={`${styles.icon} ${styles.icon__incomplete}`}>
+                    <img
+                      src="https://img.icons8.com/pastel-glyph/20/000000/upload--v1.png"
+                      alt=""
+                    />
+                  </span>
                 </li>
               </ul>
             </div>

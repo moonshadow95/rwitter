@@ -5,15 +5,17 @@
   height: 100vh;
 }
 .nav__container {
+  width: 20%;
+  min-width: 280px;
   height: 100%;
-  width: 22%;
 }
 .main {
   position: relative;
+  width: 70%;
+  min-width: 550px;
   height: 100%;
-  width: 53%;
 }
 .search__container {
-  width: 25%;
   height: 100%;
+  max-width: 340px;
 }

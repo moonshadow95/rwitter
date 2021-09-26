@@ -10,6 +10,7 @@ import Notifications from "./menu/notifications/Notifications";
 import Navigation from "./navigator/Navigation";
 import SearchForm from "./searchForm/SearchForm";
 import styles from "./router.module.css";
+import LocationDisplay from "./locationDisplay/LocationDisplay";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
@@ -22,20 +23,9 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
                 <Navigation userObj={userObj} />
               </div>
               <div className={styles.main}>
+                <LocationDisplay />
                 <Route exact path="/">
                   <Home userObj={userObj} />
-                </Route>
-                <Route exact path="/notifications">
-                  <Notifications />
-                </Route>
-                <Route exact path="/messages">
-                  <Messages />
-                </Route>
-                <Route exact path="/bookmarks">
-                  <Bookmarks />
-                </Route>
-                <Route exact path="/lists">
-                  <Lists />
                 </Route>
                 <Route exact path="/profile">
                   <Profile userObj={userObj} refreshUser={refreshUser} />

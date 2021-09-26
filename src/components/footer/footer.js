@@ -13,12 +13,6 @@ const Footer = (props) => (
       More <FontAwesomeIcon icon={faEllipsisH} />
     </span>
     <span>&copy; {new Date().getFullYear()} Rwitter, Jong.</span>
-    <ul className={styles.more}>
-      <li>About</li>
-      <li>Status</li>
-      <li>Rwitter for Business</li>
-      <li>Developers</li>
-    </ul>
   </footer>
 );
 

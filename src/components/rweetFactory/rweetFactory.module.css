@@ -26,6 +26,7 @@ textarea:focus {
   width: 50px;
   height: 50px;
   margin-top: 0.5em;
+  border: 1px solid rgb(168, 168, 168);
   overflow: hidden;
 }
 .avatar img {
@@ -120,9 +121,15 @@ label img {
   width: 75px;
   height: 30px;
   border: 1px solid #000;
-  color: #fff;
   margin-left: auto;
   opacity: 0.6;
+  transition: all 200ms ease-in-out;
+}
+.submit__btn:hover {
+  background: #000;
+}
+.submit__btn:hover input {
+  color: #fff;
 }
 .submit__input {
   background: none;

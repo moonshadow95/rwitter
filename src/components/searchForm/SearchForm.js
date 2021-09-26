@@ -1,4 +1,8 @@
-import { faCog, faEllipsisH, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faEllipsisH,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "components/footer/footer";
 import { dbService } from "fbase";
@@ -43,9 +47,9 @@ const SearchForm = () => {
   return (
     <div className={styles.container}>
       {/* search twitter */}
-      <div>
+      <div className={styles.search__container}>
         <form onSubmit={onChange}>
-          <div>
+          <div className={styles.search__form}>
             <img
               src="https://img.icons8.com/ios-glyphs/22/000000/search--v1.png"
               alt=""
@@ -62,15 +66,15 @@ const SearchForm = () => {
           </div>
         </form>
         {searching && (
-          <div>
+          <div className={styles.hover__container}>
             {searchedRweets.length === 0 ? (
               <span>Try searching for a keyword</span>
             ) : (
-              <>
+              <div className={styles.result__container}>
                 {searchedRweets.map((rweet, index) => (
                   <Rweet key={index} rweetObj={rweet} />
                 ))}
-              </>
+              </div>
             )}
             <span onClick={onSearchOut}>
               <FontAwesomeIcon icon={faTimes} />
@@ -79,147 +83,148 @@ const SearchForm = () => {
         )}
       </div>
       {/* trends for you */}
-      <div>
-        <div>
+      <div className={styles.trend__container}>
+        <div className={styles.title}>
           <span>Trends for you</span>
-          <span>
-            <FontAwesomeIcon icon={faCog} />
-          </span>
+          <img
+            src="https://img.icons8.com/ios/18/000000/settings--v1.png"
+            alt=""
+          />
         </div>
-        <ul>
-          <li>
-            <div>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <div className={styles.small}>
               <span>Trending in South Korea</span>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
-            <div>
+            <div className={styles.strong}>
               <span>노마드코더</span>
             </div>
-            <div>
+            <div className={styles.small}>
               <span>5,586 Tweets</span>
             </div>
           </li>
-          <li>
-            <div>
+          <li className={`${styles.item} ${styles.incomplete}`}>
+            <div className={styles.small}>
               <span>Trending in South Korea</span>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
-            <div>
+            <div className={styles.strong}>
               <span>니꼬</span>
             </div>
-            <div>
+            <div className={styles.small}>
               <span>4,485 Tweets</span>
             </div>
           </li>
-          <li>
-            <div>
+          <li className={`${styles.item} ${styles.incomplete}`}>
+            <div className={styles.small}>
               <span>Trending in South Korea</span>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
-            <div>
+            <div className={styles.strong}>
               <span>린</span>
             </div>
-            <div>
+            <div className={styles.small}>
               <span>4,485 Tweets</span>
             </div>
           </li>
-          <li>
-            <div>
+          <li className={styles.item}>
+            <div className={styles.small}>
               <span>Trending in South Korea</span>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
-            <div>
+            <div className={styles.strong}>
               <span>리액트</span>
             </div>
-            <div>
+            <div className={styles.small}>
               <span>4,316 Tweets</span>
             </div>
           </li>
-          <li>
-            <div>
+          <li className={styles.item}>
+            <div className={styles.small}>
               <span>Trending in South Korea</span>
               <FontAwesomeIcon icon={faEllipsisH} />
             </div>
-            <div>
+            <div className={styles.strong}>
               <span>파이어베이스</span>
             </div>
-            <div>
+            <div className={styles.small}>
               <span>1,546 Tweets</span>
             </div>
           </li>
           {showMore && (
             <>
-              <li>
-                <div>
+              <li className={`${styles.item} ${styles.incomplete}`}>
+                <div className={styles.small}>
                   <span>Trending in South Korea</span>
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
-                <div>
+                <div className={styles.strong}>
                   <span>월요일 좋아</span>
                 </div>
-                <div>
+                <div className={styles.small}>
                   <span>673 Tweets</span>
                 </div>
               </li>
-              <li>
-                <div>
+              <li className={styles.item}>
+                <div className={styles.small}>
                   <span>Trending in South Korea</span>
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
-                <div>
+                <div className={styles.strong}>
                   <span>아두이노</span>
                 </div>
-                <div>
+                <div className={styles.small}>
                   <span>895 Tweets</span>
                 </div>
               </li>
-              <li>
-                <div>
+              <li className={styles.item}>
+                <div className={styles.small}>
                   <span>Trending in South Korea</span>
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
-                <div>
+                <div className={styles.strong}>
                   <span>자바스크립트</span>
                 </div>
-                <div>
+                <div className={styles.small}>
                   <span>6,246 Tweets</span>
                 </div>
               </li>
-              <li>
-                <div>
+              <li className={styles.item}>
+                <div className={styles.small}>
                   <span>Trending in South Korea</span>
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
-                <div>
+                <div className={styles.strong}>
                   <span>김치 좋아</span>
                 </div>
-                <div>
+                <div className={styles.small}>
                   <span>5,441 Tweets</span>
                 </div>
               </li>
-              <li>
-                <div>
+              <li className={styles.item}>
+                <div className={styles.small}>
                   <span>Trending in South Korea</span>
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
-                <div>
+                <div className={styles.strong}>
                   <span>감자 좋아</span>
                 </div>
-                <div>
+                <div className={styles.small}>
                   <span>3,824 Tweets</span>
                 </div>
               </li>
             </>
           )}
           {!showMore ? (
-            <li>
-              <div>
+            <li className={styles.item}>
+              <div className={styles.showmore}>
                 <span onClick={toggleShowMore}>Show more</span>
               </div>
             </li>
           ) : (
-            <li>
-              <div>
+            <li className={styles.item}>
+              <div className={styles.showmore}>
                 <span onClick={toggleShowMore}>Show less</span>
               </div>
             </li>
@@ -227,66 +232,75 @@ const SearchForm = () => {
         </ul>
       </div>
       {/* Who to follow */}
-      <div>
-        <div>
+      <div className={styles.trend__container}>
+        <div className={styles.title}>
           <span>Who to follow</span>
         </div>
-        <ul>
-          <li>
-            <div>
-              <div>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <div className={styles.follow__container}>
+              <div className={styles.follow__img}>
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
-              <div>
-                <span>노마드코더</span>
-                <img
-                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
-                  alt=""
-                />
-                <span>@nomadcoders.co</span>
+              <div className={styles.follow__content}>
+                <span className={styles.strong}>
+                  노마드코더
+                  <FontAwesomeIcon
+                    className={styles.check}
+                    icon={faCheck}
+                    size="xs"
+                  />
+                </span>
+                <span className={styles.small}>@nomadcoders.co</span>
               </div>
-              <div>
+              <div className={styles.follow__btn}>
                 <span>Follow</span>
               </div>
             </div>
           </li>
-          <li>
-            <div>
-              <div>
+          <li className={`${styles.item} ${styles.incomplete}`}>
+            <div className={styles.follow__container}>
+              <div className={styles.follow__img}>
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
-              <div>
-                <span>니꼬</span>
-                <img
-                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
-                  alt=""
-                />
-                <span>@nico.</span>
+              <div className={styles.follow__content}>
+                <span className={styles.strong}>
+                  니꼬
+                  <FontAwesomeIcon
+                    className={styles.check}
+                    icon={faCheck}
+                    size="xs"
+                  />
+                </span>
+                <span className={styles.small}>@nico.</span>
               </div>
-              <div>
+              <div className={styles.follow__btn}>
                 <span>Follow</span>
               </div>
             </div>
           </li>
-          <li>
-            <div>
-              <div>
+          <li className={`${styles.item} ${styles.incomplete}`}>
+            <div className={styles.follow__container}>
+              <div className={styles.follow__img}>
                 <img src="/image/nomadcoders.svg" alt="" />
               </div>
-              <div>
-                <span>린</span>
-                <img
-                  src="https://img.icons8.com/material-outlined/18/000000/ok--v1.png"
-                  alt=""
-                />
-                <span>@lynn.</span>
+              <div className={styles.follow__content}>
+                <span className={styles.strong}>
+                  린
+                  <FontAwesomeIcon
+                    className={styles.check}
+                    icon={faCheck}
+                    size="xs"
+                  />
+                </span>
+                <span className={styles.small}>@lynn.</span>
               </div>
-              <div>
+              <div className={styles.follow__btn}>
                 <span>Follow</span>
               </div>
             </div>
           </li>
-          <li>
+          <li className={`${styles.item} ${styles.incomplete}`}>
             <div>
               <span>Show more</span>
             </div>

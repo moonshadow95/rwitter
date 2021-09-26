@@ -4,7 +4,8 @@
   align-items: center;
   width: 100%;
   top: 0;
-  border-bottom: 1px solid #000;
+  border: 1px solid #000;
+  border-top: none;
   z-index: 99;
 }
 .container span {

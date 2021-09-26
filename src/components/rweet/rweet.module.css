@@ -1,10 +1,11 @@
 .rweet {
   height: 100%;
+  width: 700px;
 }
 .container {
   display: flex;
   position: relative;
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   width: 100%;
   border: 1px solid #000;
   border-bottom: none;
@@ -16,6 +17,7 @@
   width: 50px;
   height: 50px;
   overflow: hidden;
+  border: 1px solid rgb(168, 168, 168);
   border-radius: 50%;
 }
 .creator__photo img {
@@ -26,7 +28,6 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 10px;
-  padding-bottom: 14px;
   flex: 1;
 }
 .creator__info {
@@ -49,6 +50,7 @@
   align-items: center;
   gap: 4px;
   margin-top: 4px;
+  margin-bottom: 10px;
 }
 .item {
   color: #ff9500;
@@ -66,7 +68,6 @@
   overflow: hidden;
   max-height: 380px;
   max-width: fit-content;
-  margin-bottom: 1em;
 }
 .attachment__container img {
   width: 100%;
@@ -85,4 +86,68 @@
 .edit__container span {
   margin-right: 8px;
   cursor: pointer;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  margin: 4px 0;
+}
+.icon:hover {
+  border: 1px solid #000;
+}
+.icon:hover.icon__incomplete {
+  background: rgb(230, 107, 107);
+}
+
+/* Edit */
+input {
+  border: none;
+  background: none;
+}
+.input__rweet {
+  word-break: break-all;
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+.input__hashtag {
+  padding-top: 0.6em;
+  width: 100%;
+  height: 2em;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+.edit__attachment {
+  margin-bottom: 14px;
+}
+.submit__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #000;
+  margin-left: auto;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.submit__input {
+  cursor: pointer;
+}
+.submit__btn:hover {
+  background: #000;
+}
+.submit__btn:hover input {
+  color: #fff;
 }

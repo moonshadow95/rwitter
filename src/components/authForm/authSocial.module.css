@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.button {
+  color: #000;
+  text-align: center;
+  font-size: 1.1rem;
+  background: #fff;
+  width: 250px;
+  padding: 15px 15px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.button:hover {
+  color: #fff;
+  background: rgb(44, 44, 44);
+}

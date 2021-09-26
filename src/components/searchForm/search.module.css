@@ -1,3 +1,103 @@
 .container {
+  position: relative;
   height: 100%;
+  margin-left: 30px;
+  padding-top: 5px;
+}
+.search__container {
+  position: sticky;
+  top: 0;
+  border: 1px solid #000;
+  z-index: 1;
+}
+
+.search__form {
+  display: flex;
+  background: #fff;
+  padding: 5px 15px;
+  align-items: center;
+}
+.hover__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.trend__container {
+  margin-top: 15px;
+  border: 1px solid #000;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 15px;
+}
+.list {
+}
+.item {
+  padding: 15px;
+  background: #fff;
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+}
+.item:hover {
+  color: #fff;
+  background-color: #000;
+}
+.item:hover.incomplete {
+  color: #fff;
+  background-color: rgb(230, 107, 107);
+}
+.small {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.strong {
+  font-weight: 600;
+  padding: 4px 0;
+}
+.showmore {
+  color: #ff9500;
+}
+.showmore span {
+  display: block;
+}
+
+/* Who to follow */
+.follow__container {
+  display: flex;
+  align-items: center;
+}
+.follow__img {
+  border: 1px solid rgb(168, 168, 168);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.follow__img img {
+  width: 100%;
+}
+.follow__content {
+  display: flex;
+  flex-direction: column;
+}
+.follow__btn {
+  margin-left: auto;
+  border: 1px solid #000;
+  padding: 5px 10px;
+  background: #fff;
+  color: #000 !important;
+}
+.check {
+  margin-left: 4px;
 }
