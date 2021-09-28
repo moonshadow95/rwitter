@@ -7,10 +7,14 @@ const Home = ({ userObj }) => {
   const [rweets, setRweets] = useState([]);
   useEffect(() => {
     dbService.collection("rweets").onSnapshot((snapshot) => {
-      const rweetArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const rweetArray = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) =>
+          a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0
+        );
       setRweets(rweetArray);
     });
   }, []);

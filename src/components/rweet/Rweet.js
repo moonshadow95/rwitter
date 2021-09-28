@@ -85,7 +85,6 @@ const Rweet = ({ rweetObj, isOwner }) => {
       }
     }
   };
-
   return (
     <div className="rweet">
       {editing ? (
